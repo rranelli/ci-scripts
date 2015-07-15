@@ -27,9 +27,10 @@ v1.2.3.sbrebols
 Add the following lines to your jenkins job:
 
 ```sh
-wget ~ <(cat .ci-scripts-version || master)
-unzip ~
-build-scripts/build [build-type]
+cd <your project root>
+wget --output-document build-scripts.tar.gz https://code.locaweb.com.br/locawebcommon/ci-scripts/repository/archive.tar.gz?ref="$(cat .ci-scripts-version || echo master)"
+tar xvf build-scripts.tar.gz --strip=1
+build-scripts/build <build-type>
 ```
 
 This will download this project build scripts and run them against your project

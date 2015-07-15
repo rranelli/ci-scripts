@@ -7,8 +7,8 @@ export BUILD_SCRIPTS_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 export GIT_ROOT=$(cd $BUILD_SCRIPTS_DIR && git rev-parse --show-toplevel)
 export PROJECT_NAME=$(basename $(cd "$GIT_ROOT" && pwd))
 
-source $BUILD_SCRIPTS_DIR/env.sh
-source $BUILD_SCRIPTS_DIR/jobs.sh
+source $GIT_ROOT/env.sh || source $GIT_ROOT/env.sh.example
+source $GIT_ROOT/jobs.sh || source $GIT_ROOT/jobs.sh.example
 
 source $BUILD_SCRIPTS_DIR/helpers
 
