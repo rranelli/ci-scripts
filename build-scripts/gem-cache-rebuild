@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "Gemfile.lock md5sum is $GEMFILE_MD5"
+mkdir -p $GEM_MD5_PATH
+
+echo "### Rebuilding gem cache"
+cp -Rf vendor/* $GEM_MD5_PATH

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+gem list gitlab -i > /dev/null 2>&1 || gem install gitlab --no-ri --no-rdoc
+$BUILD_SCRIPTS_DIR/gitlab-notify.rb || exit 0

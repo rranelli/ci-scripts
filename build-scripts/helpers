@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+grn_echo() {
+    local txtgrn='\e[0;32m' # Green
+    local clroff='\e[0m' # Text Reset
+    echo -e "$txtgrn$1$clroff"
+}
+
+red_echo() {
+    local txtred='\e[0;31m' # Red
+    local clroff='\e[0m' # Text Reset
+
+    echo -e "$txtred$1$clroff"
+}
+
+execute() {
+    grn_echo "### Executing $1"
+    $BUILD_SCRIPTS_DIR/$1
+}

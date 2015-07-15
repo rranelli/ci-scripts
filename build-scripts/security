@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Security validation
+bundle exec brakeman
+bundle exec bundle-audit check --ignore $BUNDLE_AUDIT_IGNORED_CVES

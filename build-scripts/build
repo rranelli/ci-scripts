@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+set -e
+
+[ -f ~/.bash_profile ] && source ~/.bash_profile
+
+export BUILD_SCRIPTS_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+export GIT_ROOT=$(cd $BUILD_SCRIPTS_DIR && git rev-parse --show-toplevel)
+export PROJECT_NAME=$(basename $(cd "$GIT_ROOT" && pwd))
+
+source $BUILD_SCRIPTS_DIR/env.sh
+source $BUILD_SCRIPTS_DIR/jobs.sh
+
+source $BUILD_SCRIPTS_DIR/helpers
+
+build() {
+    cd $GIT_ROOT
+
+    steps=$1[@]
+
+    red_echo "### This build will execute the following steps:"
+    for step in "${!steps}"; do grn_echo "- $step"; done
+
+    for step in "${!steps}"
+    do execute $step || exit $?; done
+}
+
+build_with_notify() {
+    (build $1 && execute gitlab-notify) ||
+            (BUILD_FAILED=true execute gitlab-notify && exit 1)
+}
+
+if [ $# == 0 ]; then
+    build_with_notify test
+else
+    build_with_notify $1
+fi

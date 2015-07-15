@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+test=(
+    git-clean
+    rvm-setup
+    gem-cache-import
+    bundle-install
+    rspec
+    gem-cache-rebuild
+)
+
+quality=(
+    git-clean
+    rvm-setup
+    gem-cache-import
+    bundle-install
+    rubycritic
+    security
+    gem-cache-rebuild
+)
+
+package=(
+    # git-clean must be called BEFORE this shell script, or else dhc won't
+    # create the debian/changelog file and the build will have version 0.0
+    gem-cache-import
+    debian-package
+    gem-cache-rebuild
+)

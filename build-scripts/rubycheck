@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+GIT_ROOT=$SCRIPT_DIR/..
+cd $GIT_ROOT
+
+echo '### Running Integrated tests'
+RAILS_ENV=test bundle exec rake mimicheck:run_db_lifecycle
