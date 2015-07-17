@@ -25,7 +25,7 @@ build() {
 }
 
 build_with_notify() {
-    (build $1 && execute gitlab-notify) ||
+    (build $1) && execute gitlab-notify ||
             (BUILD_FAILED=true execute gitlab-notify && exit 1)
 }
 

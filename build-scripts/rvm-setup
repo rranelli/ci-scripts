@@ -11,5 +11,5 @@ else
     exit 1
 fi
 
-rvm gemset --force empty
+# rvm gemset --force empty
 echo "### Rvm loaded"
