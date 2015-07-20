@@ -4,11 +4,11 @@
 
 ### Configuration:
 
-To customize your job, you need to add the `jobs.sh` and `env.sh` files to your
+To customize your job, you need to add the `ci-jobs.sh` and `ci-env.sh` files to your
 git project root.
 
-The `jobs.sh` must define the build types and their steps for your project. See
-[jobs.sh.example](./jobs.sh.example).
+The `ci-jobs.sh` must define the build types and their steps for your project. See
+[ci-jobs.sh.example](./ci-jobs.sh.example).
 
 The `env.sh` must define environment variables that will be sourced into your
 build scripts (contained in the `build-scripts/` directory)
@@ -34,5 +34,5 @@ build-scripts/build <build-type>
 ```
 
 This will download this project build scripts and run them against your project
-configuration. If no configuration is provided, the [env.sh.example](./env.sh.example)
-and [jobs.sh.example](./jobs.sh.example) will be used instead.
+configuration. If no configuration is provided, the [ci-env.sh.example](./ci-env.sh.example)
+and [ci-jobs.sh.example](./ci-jobs.sh.example) will be used instead.

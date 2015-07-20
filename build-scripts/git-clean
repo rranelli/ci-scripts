@@ -7,5 +7,5 @@ cd $SCRIPT_DIR
 GIT_ROOT="$(git rev-parse --show-toplevel)"
 cd $GIT_ROOT
 
-git clean -ffdx -e build-scripts -e env.sh.example -e jobs.sh.example
+git clean -ffdx -e build-scripts -e ci-env.sh.example -e ci-jobs.sh.example
 git reset --hard
