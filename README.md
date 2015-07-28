@@ -36,3 +36,16 @@ build-scripts/build <build-type>
 This will download this project build scripts and run them against your project
 configuration. If no configuration is provided, the [ci-env.sh.example](./ci-env.sh.example)
 and [ci-jobs.sh.example](./ci-jobs.sh.example) will be used instead.
+
+### Overriding individual scripts
+
+If you wish to override the behavior of some script provided by this repository,
+or want to add one of your own making, just add the scripts in the
+`build-scripts` directory of your project's git root.
+
+For example, if you want to use your own rspec script, you should create a file
+`build-scripts/rspec` in your project. The provided `build` script will use it
+instead of the default one.
+
+It's *important* to make sure that every script in that directory is
+*executable*. (i.e., just `chmod +x` it.)
