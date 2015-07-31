@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+gem list gitlab -i > /dev/null 2>&1 || gem install gitlab --no-ri --no-rdoc
+gem list reek -i > /dev/null 2>&1 || gem install reek --no-ri --no-rdoc
+
+reek --no-color -U $(git diff --diff-filter=AM --name-only master..HEAD | grep '\.rb$') \
+    | $BUILD_SCRIPTS_DIR/reek-notify.rb || exit 0
