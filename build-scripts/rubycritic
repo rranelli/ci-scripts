@@ -3,3 +3,8 @@ set -euo pipefail
 
 echo '### Running Ruby critic'
 bundle exec rubycritic app lib --path tmp/rubycritic
+
+set +eo pipefail
+echo '### Running reek notifier'
+bundle exec reek --no-color -U $(git diff --diff-filter=AM --name-only master..HEAD | grep '\.rb$') \
+    | $BUILD_SCRIPTS_DIR/reek-notify.rb || exit 0
