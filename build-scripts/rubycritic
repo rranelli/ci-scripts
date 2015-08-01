@@ -4,8 +4,9 @@ set -xeuo pipefail
 echo '### Running Ruby critic'
 bundle exec rubycritic app lib --path tmp/rubycritic
 
-set +eo pipefail
 echo '### Running reek notifier'
+set +eo pipefail
+
 gem list gitlab -i > /dev/null 2>&1 || gem install gitlab --no-ri --no-rdoc
 
 if [ -f $GIT_ROOT/.reek ]; then

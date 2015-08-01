@@ -2,6 +2,15 @@
 
 ## Usage:
 
+### Requirements:
+
+If you intend to use the default CI suite, make sure your Gemfile contains the
+following gems:
+
+- brakeman
+- bundler-audit
+- rubycritic
+
 ### Configuration:
 
 To customize your job, you need to add the `ci-jobs.sh` and `ci-env.sh` files to your
