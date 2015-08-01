@@ -30,7 +30,7 @@ def to_warning_presentation
       w[:message] =~ /(.*)\((.*)\)\s*\[(.*)\]$/
       link = "[#{$2}](#{$3})"
       msg = $1
-      "&nbsp;&nbsp;[L#{l}](#{gitlab_file_url(f, l)}) -- #{link} : #{msg}"
+      "&nbsp;&nbsp; *  #{link} -- #{msg} [L#{l}](#{gitlab_file_url(f, l)})"
     end
   end
 end
