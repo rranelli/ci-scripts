@@ -8,5 +8,6 @@ echo $(git branch -v)
 
 set +eo pipefail
 echo '### Running reek notifier'
+gem list gitlab -i > /dev/null 2>&1 || gem install gitlab --no-ri --no-rdoc
 bundle exec reek --no-color -U $(git diff --diff-filter=AM --name-only "origin/master" HEAD | grep '\.rb$') \
     | $BUILD_SCRIPTS_DIR/reek-notify.rb || exit 0
