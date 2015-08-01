@@ -4,10 +4,17 @@ set -xeuo pipefail
 echo '### Running Ruby critic'
 bundle exec rubycritic app lib --path tmp/rubycritic
 
-echo $(git branch -v)
-
 set +eo pipefail
 echo '### Running reek notifier'
 gem list gitlab -i > /dev/null 2>&1 || gem install gitlab --no-ri --no-rdoc
-bundle exec reek --no-color -U $(git diff --diff-filter=AM --name-only "origin/master" HEAD | grep '\.rb$') \
+
+if [ -f $GIT_ROOT/.reek ]; then
+    config=$GIT_ROOT/.reek
+else
+    config=$GIT_ROOT/config.reek.example
+fi
+
+files_to_inspect=$(git diff --diff-filter=AM --name-only "origin/master" HEAD | grep '\.rb$')
+
+bundle exec reek -c $config --no-color -U $files_to_inspect \
     | $BUILD_SCRIPTS_DIR/reek-notify.rb || exit 0
