@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -xeuo pipefail
 
 echo '### Running Ruby critic'
 bundle exec rubycritic app lib --path tmp/rubycritic

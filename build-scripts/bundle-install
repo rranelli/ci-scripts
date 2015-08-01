@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -xeuo pipefail
 
 gem list bundler -i > /dev/null 2>&1 || gem install bundler --no-ri --no-rdoc
 
