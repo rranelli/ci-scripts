@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
-GIT_ROOT=$SCRIPT_DIR/..
-cd $GIT_ROOT
-
-PRODUCT_MANAGER_URL=product-manager.devintegration.locaweb.com.br
-
-scp -r spec/factories $PRODUCT_MANAGER_URL:/opt/product-manager/spec
