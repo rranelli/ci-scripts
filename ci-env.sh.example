@@ -10,6 +10,7 @@ export GITLAB_ENDPOINT=https://code.locaweb.com.br/api/v3
 export GEMFILE_MD5=$(md5sum $GIT_ROOT/Gemfile.lock | awk '{print $1}')
 export GEM_CACHE_PATH=$GIT_ROOT/../cache
 export GEM_MD5_PATH=$GEM_CACHE_PATH/$GEMFILE_MD5
+# export BUNDLE_GEM_PATH=.bundle
 
 # Test job
 export COVERAGE=true
