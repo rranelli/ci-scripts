@@ -82,6 +82,10 @@ merge_request = project && Gitlab.client
 ###############
 # Actual call #
 ###############
-Gitlab.client.create_merge_request_comment(
-  project.id, merge_request.id, reek_message
-)
+if project && merge_request
+  Gitlab.client.create_merge_request_comment(
+    project.id, merge_request.id, reek_message
+  )
+else
+  puts 'Couldn\'t find a merge request to report to'
+end

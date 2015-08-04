@@ -61,9 +61,13 @@ EOF
 Trying to comment in merge request with message: #{message}
 ...
 EOF
-  Gitlab.client.create_merge_request_comment(
-    project.id, merge_request.id, message
-  )
+  if project && merge_request
+    Gitlab.client.create_merge_request_comment(
+      project.id, merge_request.id, message
+    )
+  else
+    puts 'Couldn\'t find a merge request to report to'
+  end
   puts 'Done!'
 rescue => e
   puts "Failed! Skipping comment in merge request... \n #{e.message}"
