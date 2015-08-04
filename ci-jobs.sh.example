@@ -23,6 +23,7 @@ package=(
     # create the debian/changelog file and the build will have version 0.0
     rvm-setup
     gem-cache-import
+    bundle-install-deployment
     debian-package
     gem-cache-rebuild
 )
