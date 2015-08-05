@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -xeuo pipefail
+
+gem list bundler -i > /dev/null 2>&1 || gem install bundler --no-ri --no-rdoc
+
+bundle install --path ${BUNDLE_GEM_PATH:-vendor/bundle} --without "development test debug"
