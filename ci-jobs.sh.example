@@ -4,8 +4,8 @@ test=(
     rvm-setup
     gem-cache-import
     bundle-install
-    rspec
     gem-cache-rebuild
+    rspec
 )
 
 quality=(
@@ -13,9 +13,9 @@ quality=(
     rvm-setup
     gem-cache-import
     bundle-install
+    gem-cache-rebuild
     rubycritic
     security
-    gem-cache-rebuild
 )
 
 package=(
@@ -24,6 +24,6 @@ package=(
     rvm-setup
     gem-cache-import
     bundle-install-deployment
-    debian-package
     gem-cache-rebuild
+    debian-package
 )
