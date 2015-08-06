@@ -19,3 +19,5 @@ files_to_inspect=$(git diff --diff-filter=AM --name-only "origin/master" HEAD | 
 
 bundle exec reek -c $config --no-color -U $files_to_inspect \
     | $BUILD_SCRIPTS_DIR/reek-notify.rb || exit 0
+
+set -eo pipefail

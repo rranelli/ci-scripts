@@ -26,12 +26,7 @@ build() {
 
 build_with_notify() {
     (build $1) && execute build-status-notify ||
-            (red_echo "BUILD FAILED\n###ENV" && env \
-                    && BUILD_FAILED=true execute build-status-notify && exit 1)
+            (BUILD_FAILED=true execute build-status-notify && exit 1)
 }
 
-if [ $# == 0 ]; then
-    build_with_notify test
-else
-    build_with_notify $1
-fi
+build_with_notify $1

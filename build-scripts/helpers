@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+set -e
+
 grn_echo() {
     local txtgrn='\e[0;32m' # Green
     local clroff='\e[0m' # Text Reset
