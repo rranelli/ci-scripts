@@ -18,7 +18,7 @@ build() {
     steps=$1[@]
 
     red_echo "### This build will execute the following steps:"
-    for step in "${!steps}"; do grn_echo "- $step"; done
+    for step in "${!steps}"; do red_echo "- $step"; done
 
     for step in "${!steps}"
     do execute $step || exit $?; done
