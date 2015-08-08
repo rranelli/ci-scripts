@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
-set +eo pipefail
-set -u
+set -euo pipefail
 
-# set up gitlab client
-gem list gitlab -i > /dev/null 2>&1 || gem install gitlab --no-ri --no-rdoc
+# get files which have been added or modified between HEAD and origin/master
+files_to_inspect=$(git diff --diff-filter=AM --name-only "origin/master" HEAD | grep '\.rb$')
 
 # find config file
 if [ -f $GIT_ROOT/.reek ]; then
@@ -12,13 +11,14 @@ else
     config=$GIT_ROOT/config.reek.example
 fi
 
-# get files which have been added or modified between HEAD and origin/master
-files_to_inspect=$(git diff --diff-filter=AM --name-only "origin/master" HEAD | grep '\.rb$')
+# Set gitlab up
+bundle_verify gitlab
+bundle_verify reek
 
-export GITLAB_PROJECT_URL=$("$BUILD_SCRIPTS_DIR/gitlab-notifiers/project-url.rb")
-echo $GITLAB_PROJECT_URL
+export GITLAB_PROJECT_URL=$(bundle exec $BUILD_SCRIPTS_DIR/gitlab-notifiers/project-url.rb)
+
+set +o pipefail
 bundle exec reek -c $config --no-color -U $files_to_inspect \
     | $BUILD_SCRIPTS_DIR/gitlab-notifiers/format-reek-report-message.rb \
-    | $BUILD_SCRIPTS_DIR/gitlab-notifiers/notify.rb
-
-set -eo pipefail
+    | bundle exec $BUILD_SCRIPTS_DIR/gitlab-notifiers/notify.rb
+set -o pipefail

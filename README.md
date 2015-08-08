@@ -10,6 +10,8 @@ following gems:
 - brakeman
 - bundler-audit
 - rubycritic
+- rubocop
+- gitlab
 
 ### Configuration:
 

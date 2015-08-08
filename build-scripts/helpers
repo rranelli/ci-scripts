@@ -22,3 +22,9 @@ execute() {
     red_echo "### Running: $1"
     $BUILD_SCRIPTS_DIR/$1 |& with_label $1
 }
+
+bundle_verify() {
+    bundle list $1 ||
+        (echo "You must add the $1 gem to your bundle to enjoy all of ci-scripts niceties" &&
+                exit 1)
+}
