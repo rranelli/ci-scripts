@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# Command to pipe through this file: "reek -U --no-color **/*.rb"
+# Command to pipe through this file: "bundle exec reek -c $config --no-color -U $files_to_inspect"
 
 def reek_message
   is_new_analysis = -> x { x =~ /([^.]*\.rb) -- \d+ warnings:$/ }

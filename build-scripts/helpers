@@ -25,6 +25,6 @@ execute() {
 
 bundle_verify() {
     bundle list $1 ||
-        (echo "You must add the $1 gem to your bundle to enjoy all of ci-scripts niceties" &&
+        (red_echo "You must add the $1 gem to your bundle to enjoy all of ci-scripts niceties" &&
                 exit 1)
 }
