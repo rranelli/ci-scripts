@@ -11,7 +11,7 @@ with_label() {
     local clroff='\e[0m' # Text Reset
 
     name=$1
-    while read LINE
+    while IFS= read LINE
     do
         echo -e "$txtgrn$name: $clroff$LINE"
     done

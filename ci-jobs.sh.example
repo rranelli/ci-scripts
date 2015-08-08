@@ -35,7 +35,7 @@ package=(
     debian-package
 )
 package_ensure=(
-    gem-cache-build
+    gem-cache-rebuild
     build-status-notify
 )
 
