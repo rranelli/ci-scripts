@@ -21,7 +21,7 @@ def reek_message
 end
 
 def to_warning_presentation
-  -> f, w do # homemade currying
+  -> f, w do
     l = w[:line_number]
 
     w[:message] =~ /(.*)\((.*)\)\s*\[(.*)\]$/
