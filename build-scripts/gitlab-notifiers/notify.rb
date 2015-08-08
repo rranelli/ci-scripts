@@ -33,6 +33,7 @@ begin
 
   puts <<EOF
 Trying to comment in merge request with message:
+
 #{message}
 EOF
 
