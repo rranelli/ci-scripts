@@ -15,7 +15,10 @@ fi
 # get files which have been added or modified between HEAD and origin/master
 files_to_inspect=$(git diff --diff-filter=AM --name-only "origin/master" HEAD | grep '\.rb$')
 
+export GITLAB_PROJECT_URL=$(BUILD_SCRIPTS_DIR/gitlab-project-url.rb)
+
 bundle exec reek -c $config --no-color -U $files_to_inspect \
-    | $BUILD_SCRIPTS_DIR/reek-notify.rb
+    | $BUILD_SCRIPTS_DIR/format-reek-report-message.rb \
+    | $BUILD_SCRIPTS_DIR/gitlab-notify.rb
 
 set -eo pipefail

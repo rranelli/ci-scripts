@@ -31,7 +31,8 @@ build() {
     red_echo "### $job will execute the following steps:"
     for step in "${!steps}"; do red_echo "- $step"; done
 
-    failure_step=""
+    # exporting is needed so that scripts can rely on this
+    export failure_step=""
     for step in "${!steps}"
     do
         [ -f $BUILD_SCRIPTS_DIR/${step}_pre ] &&
