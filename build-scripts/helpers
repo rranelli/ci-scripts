@@ -5,6 +5,7 @@ red_echo() {
 
     echo -e "$txtred$1$clroff"
 }
+export -f red_echo
 
 with_label() {
     local txtgrn='\e[1;32m' # Green
@@ -28,3 +29,4 @@ bundle_verify() {
         (red_echo "You must add the $1 gem to your bundle to enjoy all of ci-scripts niceties" &&
                 exit 1)
 }
+export -f bundle_verify
