@@ -49,21 +49,17 @@ build() {
 
     # checks wether an associated ensure job exists
     ensure_job=""
-    set +u
     eval [ ! -z \$${job}_ensure ] && ensure_job=${job}_ensure
-    set -u
 
-    # if the ensure job exists, dereference it and run its steps
     if [ ! -z $ensure_job ]; then
+        # if the ensure job exists, dereference it and run its steps
         steps=${ensure_job}[@]
-        echo
-        red_echo "### ${job}_ensure will execute the following steps:"
+        echo; red_echo "### ${job}_ensure will execute the following steps:"
         for step in "${!steps}"; do red_echo "- $step"; done
 
         for step in "${!steps}"
         do
-            # if a step fail, ignore it and keep the iteration going
-            (execute $step) || true
+            (execute $step) || true # if a step fail, ignore it.
         done
     fi
 

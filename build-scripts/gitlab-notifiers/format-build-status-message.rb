@@ -23,7 +23,7 @@ Jenkins job #{build_friendly_name} built successfully! :clap:
 EOF
 else
   puts <<EOF
-Jenkins job #{build_friendly_name} **FAILED!** :scream:
+Jenkins job #{build_friendly_name} **FAILED!** :cop:
 
 [click here](#{build_url}) for more information.
 EOF
