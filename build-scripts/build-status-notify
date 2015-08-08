@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-set -xeuo pipefail
-
-gem list gitlab -i > /dev/null 2>&1 || gem install gitlab --no-ri --no-rdoc
-$BUILD_SCRIPTS_DIR/format-build-status-message.rb | $BUILD_SCRIPTS_DIR/gitlab-notify.rb

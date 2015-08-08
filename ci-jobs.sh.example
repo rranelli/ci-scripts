@@ -2,42 +2,42 @@
 test=(
     git-clean
     rvm-setup
-    gem-cache-import
+    gem-cache/import
     bundle-install
+    gem-cache/rebuild
     db-setup
     rspec
 )
 test_ensure=(
-    gem-cache-rebuild
-    build-status-notify
+    gitlab-notifiers/build-status
 )
 
 quality=(
     git-clean
     rvm-setup
-    gem-cache-import
+    gem-cache/import
     bundle-install
+    gem-cache/rebuild
     gem-cache-rebuild
     rubycritic
     security
 )
 quality_ensure=(
-    gem-cache-rebuild
-    reek-notify
-    build-status-notify
+    gitlab-notifiers/reek
+    gitlab-notifiers/build-status
 )
 
 package=(
     # git-clean must be called BEFORE this shell script, or else dhc won't
     # create the debian/changelog file and the build will have version 0.0
     rvm-setup
-    gem-cache-import
+    gem-cache/import
     bundle-install-deployment
+    gem-cache/rebuild
     debian-package
 )
 package_ensure=(
-    gem-cache-rebuild
-    build-status-notify
+    gitlab-notifiers/build-status
 )
 
 #
