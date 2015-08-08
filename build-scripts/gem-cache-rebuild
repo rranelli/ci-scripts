@@ -4,5 +4,6 @@ set -xeuo pipefail
 echo "Gemfile.lock md5sum is $GEMFILE_MD5"
 mkdir -p $GEM_MD5_PATH
 
-echo "### Rebuilding gem cache"
+echo "Rebuilding gem cache..."
 cp -Rf ${BUNDLE_GEM_PATH:-vendor}/* $GEM_MD5_PATH
+echo "done."

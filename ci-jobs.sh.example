@@ -4,6 +4,7 @@ test=(
     rvm-setup
     gem-cache-import
     bundle-install
+    db-setup
     rspec
 )
 test_ensure=(
