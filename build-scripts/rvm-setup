@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-set -xe
-set +u
+set -xeo pipefail
 
+set +u
 if [ -f .rvmrc ]; then
     source .rvmrc
 elif [ -f .rvmrc.example ]; then

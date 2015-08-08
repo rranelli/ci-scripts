@@ -4,8 +4,11 @@ test=(
     rvm-setup
     gem-cache-import
     bundle-install
-    gem-cache-rebuild
     rspec
+)
+test_ensure=(
+    gem-cache-rebuild
+    build-status-notify
 )
 
 quality=(
@@ -17,6 +20,11 @@ quality=(
     rubycritic
     security
 )
+quality_ensure=(
+    gem-cache-rebuild
+    reek-notify
+    build-status-notify
+)
 
 package=(
     # git-clean must be called BEFORE this shell script, or else dhc won't
@@ -24,6 +32,31 @@ package=(
     rvm-setup
     gem-cache-import
     bundle-install-deployment
-    gem-cache-rebuild
     debian-package
+)
+package_ensure=(
+    gem-cache-build
+    build-status-notify
+)
+
+#
+# These jobs are used for testing purposes only
+#
+success=(
+    tests/success
+    tests/success_with_no_hooks
+    tests/success_because_minus_e_was_not_set
+    tests/success
+)
+success_ensure=(
+    tests/success_ensure
+)
+failure=(
+    tests/success
+    tests/failure
+    tests/success
+)
+failure_ensure=(
+    tests/failure_ensure
+    tests/failure_ensure
 )
