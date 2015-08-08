@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 require 'gitlab'
 token = ENV.fetch('GITLAB_TOKEN')
 endpoint = ENV.fetch('GITLAB_ENDPOINT')
