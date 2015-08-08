@@ -1,9 +1,8 @@
 #!/bin/bash
 set -xeuo pipefail
 
-echo "### cleaning old builds"
+echo "cleaning old builds ..."
 PKGS="$PROJECT_NAME"_*
 rm -rf $GIT_ROOT/../$PKGS
 
-echo "### building package"
 dpkg-buildpackage -rfakeroot -d -tc -us -uc

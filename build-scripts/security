@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 set -exuo pipefail
 
-# Security validation
-echo '### Executing brakeman'
 bundle exec brakeman
-
-echo '### Executing bundle-audit'
 bundle exec bundle-audit check --ignore $BUNDLE_AUDIT_IGNORED_CVES
