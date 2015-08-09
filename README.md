@@ -13,6 +13,8 @@ following gems:
 - rubocop
 - gitlab
 
+We recommend you to do something in the lines of [this commit](https://code.locaweb.com.br/paas/recipes-manager/commit/e2aa7840fb5a50bac146f8ea47119246a75f0516)
+
 ### Configuration:
 
 To customize your job, you need to add the `ci-jobs.sh` and `ci-env.sh` files to your
