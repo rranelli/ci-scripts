@@ -15,7 +15,7 @@ def reek_message
 
   analysis
     .map(&to_file_presentation)
-    .unshift("#### Reek smells report: :cop:")
+    .unshift("### Reek smells report: :cop:")
     .tap { |r| r.push('No smells reported! Good job! :clap:') if r.size == 1 }
     .join("\n\n")
 end

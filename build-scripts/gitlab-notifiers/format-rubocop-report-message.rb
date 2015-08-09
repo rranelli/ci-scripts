@@ -9,7 +9,7 @@ def rubocop_message(json_string)
     .reject { |f| f['offenses'] && f['offenses'].empty? }
     .flat_map(&to_file_presentation)
     .unshift("### Rubocop report: :cop:")
-    .tap { |r| r.push('No smells reported! Good job! :clap:') if r.size == 1 }
+    .tap { |r| r.push('No offenses reported! Good job! :clap:') if r.size == 1 }
     .join("\n\n")
 end
 
@@ -35,7 +35,7 @@ def to_warning(path)
     severity, message, cop = o['severity'], o['message'], o['cop_name']
 
     <<EOF
-#{severity.capitalize}: #{cop} - #{message} [#L#{line}](#{gitlab_file_url(path, line)})
+&nbsp;&nbsp; - #{severity.capitalize}: #{cop} - #{message} [#L#{line}](#{gitlab_file_url(path, line)})
 EOF
   end
 end

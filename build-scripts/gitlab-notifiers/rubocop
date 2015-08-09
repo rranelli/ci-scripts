@@ -18,7 +18,7 @@ bundle_verify rubocop
 export GITLAB_PROJECT_URL=$(bundle exec $BUILD_SCRIPTS_DIR/gitlab-notifiers/project-url.rb)
 
 set +o pipefail
-bundle exec rubocop -c $config --format json --no-color $files_to_inspect \
+bundle exec rubocop -c $config --format json --force-exclusion --no-color $files_to_inspect \
     | $BUILD_SCRIPTS_DIR/gitlab-notifiers/format-rubocop-report-message.rb \
     | bundle exec $BUILD_SCRIPTS_DIR/gitlab-notifiers/notify.rb
 set -o pipefail
