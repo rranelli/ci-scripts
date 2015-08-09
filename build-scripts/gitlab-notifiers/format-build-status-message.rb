@@ -8,7 +8,8 @@
 #  - job_name              # exported by jenkins
 
 # Build environment
-success = ENV.fetch('failure_step') == ''
+failure_step = ENV.fetch('failure_step')
+success = failure_step == ''
 
 job_name            = File.basename(ENV.fetch('JOB_NAME'))
 build_url           = File.join(ENV.fetch('BUILD_URL'), 'console')
@@ -24,6 +25,8 @@ EOF
 else
   puts <<EOF
 Jenkins job #{build_friendly_name} **FAILED!** :cop:
+
+Build failed at #{failure_step} step.
 
 [click here](#{build_url}) for more information.
 EOF
