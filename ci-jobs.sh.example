@@ -23,8 +23,9 @@ quality=(
     security
 )
 quality_ensure=(
-    gitlab-notifiers/reek
     gitlab-notifiers/build-status
+    gitlab-notifiers/rubocop
+    gitlab-notifiers/reek
 )
 
 package=(
