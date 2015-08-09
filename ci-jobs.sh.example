@@ -17,15 +17,16 @@ quality=(
     rvm-setup
     gem-cache/import
     bundle-install
-    gem-cache/rebuild
     gem-cache-rebuild
     rubycritic
     security
+    bundle-outdated
 )
 quality_ensure=(
     gitlab-notifiers/build-status
     gitlab-notifiers/rubocop
     gitlab-notifiers/reek
+    gitlab-notifiers/bundle-outdated
 )
 
 package=(

@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo 'Making sure bundle 1.10.6 is installed...' >&2
+(gem list bundler$ | grep "1\.10\.6" || gem install bundler -v 1.10.6 --no-rdoc --no-ri) >&2
+
+echo 'Checking if bundle is up to date...' >&2
+[ ! -f outdated.txt ] && bundle outdated > outdated.txt || true
+
+set +o pipefail # grep fails if there is no match! we don't want this here
+
+cat outdated.txt \
+    | grep 'in groups\? ".*default.*"' \
+    | awk 'BEGIN { print "**[CRITICAL]** Outdated *production* gems:" }
+                 { gsub(/ in group.*$/, ""); print }
+           END   { if (!NR) print "  * No outdated gems, Good job! :clap:" }
+' \
+    | tee outdated_production.txt
+
+cat outdated.txt \
+    | grep 'in groups\?' \
+    | grep -v '".*default.*"' \
+    | awk 'BEGIN { print "[Warning] Outdated *non-production* gems:" }
+                 { gsub(/ in group.*$/, ""); print $0 }
+           END   { if (!NR) print "No outdated gems, Good job! :clap:" }
+' \
+    | tee outdated_non_production.txt
+
+if [ "$(cat outdated_production.txt | wc -l)" -gt 2 ]; then
+    red_echo 'There are outdated gems!!' >&2
+    exit 1
+fi
+set -o pipefail
