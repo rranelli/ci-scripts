@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -xeuo pipefail
+set -euo pipefail
 
 bundle_verify gitlab
 $BUILD_SCRIPTS_DIR/gitlab-notifiers/format-build-status-message.rb \

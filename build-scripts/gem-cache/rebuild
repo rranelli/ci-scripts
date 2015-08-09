@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -xeuo pipefail
+set -euo pipefail
 
 echo "Gemfile.lock md5sum is $GEMFILE_MD5"
 mkdir -p $GEM_MD5_PATH
