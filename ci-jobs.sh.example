@@ -26,6 +26,7 @@ quality_ensure=(
     gitlab-notifiers/build-status
     gitlab-notifiers/rubocop
     gitlab-notifiers/reek
+    gitlab-notifiers/brakeman
     gitlab-notifiers/bundle-outdated
 )
 

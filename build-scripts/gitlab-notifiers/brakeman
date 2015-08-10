@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# get files which have been added or modified between HEAD and origin/master
+files_to_inspect=$(git diff --diff-filter=AM --name-only "origin/master" HEAD | grep '\.rb$')
+
+# Set gitlab up
+bundle_verify gitlab
+bundle_verify brakeman
+
+export GITLAB_PROJECT_URL=$(bundle exec $BUILD_SCRIPTS_DIR/gitlab-notifiers/project-url.rb)
+
+set +o pipefail
+bundle exec brakeman --format json -p $GIT_ROOT 2>/dev/null \
+    | $BUILD_SCRIPTS_DIR/gitlab-notifiers/format-brakeman-report-message.rb \
+    | bundle exec $BUILD_SCRIPTS_DIR/gitlab-notifiers/notify.rb
+set -o pipefail
