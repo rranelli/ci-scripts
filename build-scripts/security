@@ -5,4 +5,4 @@ echo 'Executing brakeman...'
 bundle exec brakeman
 
 echo 'Executing bundle-audit...'
-bundle exec bundle-audit check --ignore $BUNDLE_AUDIT_IGNORED_CVES
+bundle exec bundle-audit check --update --ignore $BUNDLE_AUDIT_IGNORED_CVES
