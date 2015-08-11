@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # get files which have been added or modified between HEAD and origin/master
-files_to_inspect=$(git diff --diff-filter=AM --name-only "origin/master" HEAD | grep '\.rb$')
+files_to_inspect=$(git diff --diff-filter=AM --name-only $(git merge-base origin/master HEAD) HEAD | grep '\.rb$')
 
 # Set gitlab up
 bundle_verify gitlab
