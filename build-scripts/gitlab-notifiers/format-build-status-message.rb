@@ -18,13 +18,13 @@ build_friendly_name = "*#{job_name} - #{build_display_name}*"
 
 if success
   puts <<EOF
-Jenkins job #{build_friendly_name} built successfully! :clap:
+Jenkins job #{build_friendly_name} foi sucesso absoluto! :clap:
 
 [click here](#{build_url}) for more information.
 EOF
 else
   puts <<EOF
-Jenkins job #{build_friendly_name} **FAILED!** :cop:
+Jenkins job #{build_friendly_name} **Falhou miseravelmente** :cop:
 
 Build failed at #{failure_step} step.
 
