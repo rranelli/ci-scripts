@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
-set -xe
-set +u
+set -eo pipefail
 
+set +u
 if [ -f .rvmrc ]; then
     source .rvmrc
 elif [ -f .rvmrc.example ]; then
     source .rvmrc.example
 else
-    echo -e "\e[0;31m Could not load .rvmrc or .rvmrc.example"
+    red_echo "Could not load .rvmrc or .rvmrc.example"
     exit 1
 fi
 
 # rvm gemset --force empty
-echo "### Rvm loaded"
+echo "Rvm loaded"
 set -u

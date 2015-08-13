@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+set -euo pipefail
+echo '!!!!!!!!!!!!!!!!!!!OMFG YOU SHOULD NEVER SEE THIS!!!!!!!!!!!!!!!!!!!!'

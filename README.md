@@ -10,6 +10,10 @@ following gems:
 - brakeman
 - bundler-audit
 - rubycritic
+- rubocop
+- gitlab
+
+We recommend you to do something in the lines of [this commit](https://code.locaweb.com.br/paas/recipes-manager/commit/e2aa7840fb5a50bac146f8ea47119246a75f0516)
 
 ### Configuration:
 

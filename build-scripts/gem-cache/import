@@ -1,26 +1,22 @@
 #!/usr/bin/env bash
-set -xeuo pipefail
+set -euo pipefail
 
-#
-## Import gem cache
-#
 echo "Gemfile.lock md5sum is $GEMFILE_MD5"
 if [ -d $GEM_MD5_PATH ]; then
-    echo "### Copying cached gems to application's folder"
+    echo "Copying cached gems to application's folder ..."
     mkdir -p vendor
     cp -rf $GEM_MD5_PATH/* vendor
 
     echo "$GEM_MD5_PATH copied to vendor"
 else
-    echo "### No gem cache to import."
+    echo "No gem cache to import."
 fi
 
-#
 ## Invalidate gem cache
-#
+
 mkdir -p $GEM_CACHE_PATH
 NUM_CACHES=$(ls -l $GEM_CACHE_PATH | grep -v "$GEMFILE_MD5" | wc -l)
-echo "### Number of caches: $NUM_CACHES"
+echo "Number of caches: $NUM_CACHES"
 
 if [ "$NUM_CACHES" -gt "10" ]; then
     echo "### Clearing old caches"

@@ -2,28 +2,65 @@
 test=(
     git-clean
     rvm-setup
-    gem-cache-import
+    gem-cache/import
     bundle-install
-    gem-cache-rebuild
+    gem-cache/rebuild
+    db-setup
     rspec
+)
+test_ensure=(
+    gitlab-notifiers/build-status
 )
 
 quality=(
     git-clean
     rvm-setup
-    gem-cache-import
+    gem-cache/import
     bundle-install
     gem-cache-rebuild
     rubycritic
     security
+    bundle-outdated
+)
+quality_ensure=(
+    gitlab-notifiers/build-status
+    gitlab-notifiers/rubocop
+    gitlab-notifiers/reek
+    gitlab-notifiers/brakeman
+    gitlab-notifiers/bundle-outdated
 )
 
 package=(
     # git-clean must be called BEFORE this shell script, or else dhc won't
     # create the debian/changelog file and the build will have version 0.0
     rvm-setup
-    gem-cache-import
+    gem-cache/import
     bundle-install-deployment
-    gem-cache-rebuild
+    gem-cache/rebuild
     debian-package
+)
+package_ensure=(
+    gitlab-notifiers/build-status
+)
+
+#
+# These jobs are used for testing purposes only
+#
+success=(
+    tests/success
+    tests/success_with_no_hooks
+    tests/success_because_minus_e_was_not_set
+    tests/success
+)
+success_ensure=(
+    tests/success_ensure
+)
+failure=(
+    tests/success
+    tests/failure
+    tests/success
+)
+failure_ensure=(
+    tests/failure_ensure
+    tests/failure_ensure
 )

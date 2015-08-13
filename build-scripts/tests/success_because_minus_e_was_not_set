@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set +e
+# asdfasdfkjasdhfkjashdaf
+echo i worked but i shouldnt

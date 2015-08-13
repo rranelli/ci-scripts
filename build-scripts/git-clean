@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -xeuo pipefail
+set -euo pipefail
 
 SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 cd $SCRIPT_DIR
@@ -11,6 +11,7 @@ git clean -ffdx \
     -e build-scripts \
     -e ci-env.sh.example \
     -e ci-jobs.sh.example \
-    -e config.reek.example
+    -e config.reek.example \
+    -e .rubocop.yml.example
 
 git reset --hard

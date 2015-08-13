@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+set +o pipefail
+$BUILD_SCRIPTS_DIR/bundle-outdated \
+    | awk '
+BEGIN { print "### Bundle outdated report: :cop:" }
+      { print $0 "\n"}
+' \
+    | bundle exec $BUILD_SCRIPTS_DIR/gitlab-notifiers/notify.rb
+set -o pipefail

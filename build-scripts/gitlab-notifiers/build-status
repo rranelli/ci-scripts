@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+bundle_verify gitlab
+$BUILD_SCRIPTS_DIR/gitlab-notifiers/format-build-status-message.rb \
+    | bundle exec $BUILD_SCRIPTS_DIR/gitlab-notifiers/notify.rb

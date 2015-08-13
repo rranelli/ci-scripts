@@ -1,25 +1,32 @@
 #!/usr/bin/env bash
-set -eo pipefail
-
 red_echo() {
     local txtred='\e[0;31m' # Red
     local clroff='\e[0m' # Text Reset
 
     echo -e "$txtred$1$clroff"
 }
+export -f red_echo
 
 with_label() {
     local txtgrn='\e[1;32m' # Green
     local clroff='\e[0m' # Text Reset
 
     name=$1
-    while read LINE
+    while IFS= read LINE
     do
         echo -e "$txtgrn$name: $clroff$LINE"
     done
 }
 
 execute() {
-    red_echo "### Running: $1 ###"
-    $BUILD_SCRIPTS_DIR/$1 | with_label $1
+    echo
+    red_echo "### Running: $1"
+    $BUILD_SCRIPTS_DIR/$1 |& with_label $1
 }
+
+bundle_verify() {
+    bundle list $1 ||
+        (red_echo "You must add the $1 gem to your bundle to enjoy all of ci-scripts niceties" &&
+                exit 1)
+}
+export -f bundle_verify
