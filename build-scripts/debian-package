@@ -7,3 +7,5 @@ rm -rf $GIT_ROOT/../$PKGS
 echo "done."
 
 dpkg-buildpackage -rfakeroot -d -tc -us -uc
+
+echo 'Debian package built successfully.'
