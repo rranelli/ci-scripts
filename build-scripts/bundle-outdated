@@ -10,20 +10,11 @@ echo 'Checking if bundle is up to date...' >&2
 set +o pipefail # grep fails if there is no match! we don't want this here
 
 cat outdated.txt \
-    | grep 'in groups\? ".*default.*"' \
-    | awk 'BEGIN { print "**[CRITICAL]** Outdated *production* gems:" }
-                 { gsub(/ in group.*$/, ""); print }
-           END   { if (!NR) print "  * No outdated gems, Good job! :clap:" }
-' \
+    | awk -f $BUILD_SCRIPTS_DIR/bundle-outdated.d/critical.awk \
     | tee outdated_production.txt
 
 cat outdated.txt \
-    | grep 'in groups\?' \
-    | grep -v '".*default.*"' \
-    | awk 'BEGIN { print "[Warning] Outdated *non-production* gems:" }
-                 { gsub(/ in group.*$/, ""); print $0 }
-           END   { if (!NR) print "  * No outdated gems, Good job! :clap:" }
-' \
+    | awk -f $BUILD_SCRIPTS_DIR/bundle-outdated.d/non-critical.awk \
     | tee outdated_non_production.txt
 
 if [ "$(cat outdated_production.txt | wc -l)" -gt 2 ]; then
