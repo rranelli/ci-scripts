@@ -2,7 +2,8 @@
 set -euo pipefail
 
 # get files which have been added or modified between HEAD and origin/master
-files_to_inspect=$(git diff --diff-filter=AM --name-only $(git merge-base origin/master HEAD) HEAD | grep '\.rb$')
+target_branch=$(bundle exec $BUILD_SCRIPTS_DIR/gitlab-notifiers/merge-request-destination-branch.rb)
+files_to_inspect=$(git diff --diff-filter=AM --name-only $(git merge-base $target_branch HEAD) HEAD | grep '\.rb$')
 
 # find config file
 if [ -f $GIT_ROOT/.reek ]; then
