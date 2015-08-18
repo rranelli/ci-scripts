@@ -17,7 +17,7 @@ quality=(
     rvm-setup
     gem-cache/import
     bundle-install
-    gem-cache-rebuild
+    gem-cache/rebuild
     rubycritic
     security
     bundle-outdated
