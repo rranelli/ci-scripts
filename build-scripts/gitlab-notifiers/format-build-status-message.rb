@@ -24,7 +24,7 @@ Jenkins job #{build_friendly_name} foi sucesso absoluto! :clap:
 EOF
 else
   puts <<EOF
-Jenkins job #{build_friendly_name} **Falhou miseravelmente** :cop:
+Jenkins job #{build_friendly_name} **Fracassou miseravelmente** :cop:
 
 Build failed at #{failure_step} step.
 
