@@ -21,7 +21,7 @@ def reek_message
 end
 
 def to_warning_presentation
-  -> f, w do
+  lambda do  |f, w|
     l = w[:line_number]
 
     w[:message] =~ /(.*)\((.*)\)\s*\[(.*)\]$/
@@ -32,7 +32,9 @@ def to_warning_presentation
 end
 
 def to_file_presentation
-  -> ((f, ws)) do
+  lambda do |file_warnings_pair|
+    f, ws = file_warnings_pair
+
     warnings = ws
       .sort_by { |x| x[:line_number].to_i }
       .map(&to_warning_presentation[f])
