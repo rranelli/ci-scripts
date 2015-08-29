@@ -13,7 +13,7 @@ source $GIT_ROOT/ci-jobs.sh || source $GIT_ROOT/ci-jobs.sh.example
 source $BUILD_SCRIPTS_DIR/helpers
 
 try_report_failure() {
-    if [ ! -z $failure_step ]; then
+    if [ ! -z "$failure_step" ]; then
         echo
         red_echo "###############"
         red_echo "BUILD FAILED AT $failure_step"
@@ -35,16 +35,16 @@ build() {
     export failure_step=""
     for step in "${!steps}"
     do
-        [ -f $BUILD_SCRIPTS_DIR/${step}_pre ] &&
-            (execute ${step}_pre || failure_step=${step}_pre)
-        [ ! -z $failure_step ] && break
+        [ -f $BUILD_SCRIPTS_DIR/"${step}_pre" ] &&
+            (execute "${step}_pre" || failure_step="${step}_pre")
+        [ ! -z "$failure_step" ] && break
 
-        execute $step || failure_step=${step}
-        [ ! -z $failure_step ] && break
+        execute "$step" || failure_step="${step}"
+        [ ! -z "$failure_step" ] && break
 
-        [ -f $BUILD_SCRIPTS_DIR/${step}_post ] &&
-            (execute ${step}_post || failure_step=${step}_post)
-        [ ! -z $failure_step ] && break
+        [ -f $BUILD_SCRIPTS_DIR/"${step}_post" ] &&
+            (execute "${step}_post" || failure_step="${step}_post")
+        [ ! -z "$failure_step" ] && break
     done
 
     # checks wether an associated ensure job exists
@@ -64,7 +64,7 @@ build() {
     fi
 
     try_report_failure
-    [ -z $failure_step ]
+    [ -z "$failure_step" ]
 }
 
 build $1

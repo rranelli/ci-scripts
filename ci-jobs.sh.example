@@ -46,6 +46,10 @@ package_ensure=(
 #
 # These jobs are used for testing purposes only
 #
+run_tests=(
+    "./build success"
+    "./build failure"
+)
 success=(
     tests/success
     tests/success_with_no_hooks
