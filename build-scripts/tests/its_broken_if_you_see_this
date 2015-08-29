@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-echo "if you're reading this, the build-scripts/build is broken"
+echo "if you're reading this, the build-scripts/build is BROKEN"

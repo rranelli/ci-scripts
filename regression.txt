@@ -1,87 +1,114 @@
-build-scripts/build: line 10: /home/renan/locaweb/ci-scripts/ci-env.sh: No such file or directory
-build-scripts/build: line 11: /home/renan/locaweb/ci-scripts/ci-jobs.sh: No such file or directory
-[0;31m### run_tests will execute the following steps:[0m
-[0;31m- ./build success[0m
-[0;31m- ./build failure[0m
+[0;31m### success will execute the following steps:[0m
+[0;31m- tests/success[0m
+[0;31m- tests/success_with_no_hooks[0m
+[0;31m- tests/success_because_minus_e_was_not_set[0m
+[0;31m- tests/success[0m
 
-[0;31m### Running: ./build success[0m
-[1;32m./build: [0m/home/renan/locaweb/ci-scripts/build-scripts/./build: line 10: /home/renan/locaweb/ci-scripts/ci-env.sh: No such file or directory
-[1;32m./build: [0m/home/renan/locaweb/ci-scripts/build-scripts/./build: line 11: /home/renan/locaweb/ci-scripts/ci-jobs.sh: No such file or directory
-[1;32m./build: [0m[0;31m### success will execute the following steps:[0m
-[1;32m./build: [0m[0;31m- tests/success[0m
-[1;32m./build: [0m[0;31m- tests/success_with_no_hooks[0m
-[1;32m./build: [0m[0;31m- tests/success_because_minus_e_was_not_set[0m
-[1;32m./build: [0m[0;31m- tests/success[0m
-[1;32m./build: [0m
-[1;32m./build: [0m[0;31m### Running: tests/success_pre[0m
-[1;32m./build: [0m[1;32mtests/success_pre: [0mim at begin
-[1;32m./build: [0m
-[1;32m./build: [0m[0;31m### Running: tests/success[0m
-[1;32m./build: [0m[1;32mtests/success: [0mThis was an astounding success! Good job!
-[1;32m./build: [0m
-[1;32m./build: [0m[0;31m### Running: tests/success_post[0m
-[1;32m./build: [0m[1;32mtests/success_post: [0mim at post
-[1;32m./build: [0m
-[1;32m./build: [0m[0;31m### Running: tests/success_with_no_hooks[0m
-[1;32m./build: [0m[1;32mtests/success_with_no_hooks: [0mNo hooks!
-[1;32m./build: [0m[1;32mtests/success_with_no_hooks: [0mbuild-scripts ci-env.sh.example ci-jobs.sh.example config.reek.example Gemfile.lock README.md regression.txt
-[1;32m./build: [0m
-[1;32m./build: [0m[0;31m### Running: tests/success_because_minus_e_was_not_set[0m
-[1;32m./build: [0m[1;32mtests/success_because_minus_e_was_not_set: [0mi worked but i shouldnt
-[1;32m./build: [0m
-[1;32m./build: [0m[0;31m### Running: tests/success_pre[0m
-[1;32m./build: [0m[1;32mtests/success_pre: [0mim at begin
-[1;32m./build: [0m
-[1;32m./build: [0m[0;31m### Running: tests/success[0m
-[1;32m./build: [0m[1;32mtests/success: [0mThis was an astounding success! Good job!
-[1;32m./build: [0m
-[1;32m./build: [0m[0;31m### Running: tests/success_post[0m
-[1;32m./build: [0m[1;32mtests/success_post: [0mim at post
-[1;32m./build: [0m
-[1;32m./build: [0m[0;31m### success_ensure will execute the following steps:[0m
-[1;32m./build: [0m[0;31m- tests/success_ensure[0m
-[1;32m./build: [0m
-[1;32m./build: [0m[0;31m### Running: tests/success_ensure[0m
-[1;32m./build: [0m[1;32mtests/success_ensure: [0mat success ensure
+[0;31m### Running: tests/success_pre[0m
+[1;32mtests/success_pre: [0mim at begin
 
-[0;31m### Running: ./build failure[0m
-[1;32m./build: [0m/home/renan/locaweb/ci-scripts/build-scripts/./build: line 10: /home/renan/locaweb/ci-scripts/ci-env.sh: No such file or directory
-[1;32m./build: [0m/home/renan/locaweb/ci-scripts/build-scripts/./build: line 11: /home/renan/locaweb/ci-scripts/ci-jobs.sh: No such file or directory
-[1;32m./build: [0m[0;31m### failure will execute the following steps:[0m
-[1;32m./build: [0m[0;31m- tests/success[0m
-[1;32m./build: [0m[0;31m- tests/failure[0m
-[1;32m./build: [0m[0;31m- tests/its_broken_if_you_see_this[0m
-[1;32m./build: [0m
-[1;32m./build: [0m[0;31m### Running: tests/success_pre[0m
-[1;32m./build: [0m[1;32mtests/success_pre: [0mim at begin
-[1;32m./build: [0m
-[1;32m./build: [0m[0;31m### Running: tests/success[0m
-[1;32m./build: [0m[1;32mtests/success: [0mThis was an astounding success! Good job!
-[1;32m./build: [0m
-[1;32m./build: [0m[0;31m### Running: tests/success_post[0m
-[1;32m./build: [0m[1;32mtests/success_post: [0mim at post
-[1;32m./build: [0m
-[1;32m./build: [0m[0;31m### Running: tests/failure[0m
-[1;32m./build: [0m[1;32mtests/failure: [0m/home/renan/locaweb/ci-scripts/build-scripts/tests/failure: line 3: sbrebolz: command not found
-[1;32m./build: [0m
-[1;32m./build: [0m[0;31m### failure_ensure will execute the following steps:[0m
-[1;32m./build: [0m[0;31m- tests/failure_ensure[0m
-[1;32m./build: [0m[0;31m- tests/failure_ensure[0m
-[1;32m./build: [0m
-[1;32m./build: [0m[0;31m### Running: tests/failure_ensure[0m
-[1;32m./build: [0m[1;32mtests/failure_ensure: [0mIm at failure ensure
-[1;32m./build: [0m[1;32mtests/failure_ensure: [0m/home/renan/locaweb/ci-scripts/build-scripts/tests/failure_ensure: line 4: asdflkjasdlfkj: command not found
-[1;32m./build: [0m
-[1;32m./build: [0m[0;31m### Running: tests/failure_ensure[0m
-[1;32m./build: [0m[1;32mtests/failure_ensure: [0mIm at failure ensure
-[1;32m./build: [0m[1;32mtests/failure_ensure: [0m/home/renan/locaweb/ci-scripts/build-scripts/tests/failure_ensure: line 4: asdflkjasdlfkj: command not found
-[1;32m./build: [0m
-[1;32m./build: [0m[0;31m###############[0m
-[1;32m./build: [0m[0;31mBUILD FAILED AT tests/failure[0m
-[1;32m./build: [0m[0;31m###############[0m
-[1;32m./build: [0m
+[0;31m### Running: tests/success[0m
+[1;32mtests/success: [0mThis was an astounding success! Good job!
+
+[0;31m### Running: tests/success_post[0m
+[1;32mtests/success_post: [0mim at post
+
+[0;31m### Running: tests/success_with_no_hooks[0m
+[1;32mtests/success_with_no_hooks: [0mNo hooks!
+[1;32mtests/success_with_no_hooks: [0mbuild-scripts ci-env.sh.example ci-jobs.sh.example config.reek.example Gemfile.lock README.md regression.txt test.sh
+
+[0;31m### Running: tests/success_because_minus_e_was_not_set[0m
+[1;32mtests/success_because_minus_e_was_not_set: [0mi worked but i shouldnt
+
+[0;31m### Running: tests/success_pre[0m
+[1;32mtests/success_pre: [0mim at begin
+
+[0;31m### Running: tests/success[0m
+[1;32mtests/success: [0mThis was an astounding success! Good job!
+
+[0;31m### Running: tests/success_post[0m
+[1;32mtests/success_post: [0mim at post
+
+[0;31m### success_ensure will execute the following steps:[0m
+[0;31m- tests/success_ensure[0m
+
+[0;31m### Running: tests/success_ensure[0m
+[1;32mtests/success_ensure: [0mat success ensure
+[0;31m### failure will execute the following steps:[0m
+[0;31m- tests/success[0m
+[0;31m- tests/failure[0m
+[0;31m- tests/its_broken_if_you_see_this[0m
+
+[0;31m### Running: tests/success_pre[0m
+[1;32mtests/success_pre: [0mim at begin
+
+[0;31m### Running: tests/success[0m
+[1;32mtests/success: [0mThis was an astounding success! Good job!
+
+[0;31m### Running: tests/success_post[0m
+[1;32mtests/success_post: [0mim at post
+
+[0;31m### Running: tests/failure[0m
+[1;32mtests/failure: [0m/home/renan/locaweb/ci-scripts/build-scripts/tests/failure: line 3: sbrebolz: command not found
+
+[0;31m### failure_ensure will execute the following steps:[0m
+[0;31m- tests/failure_ensure[0m
+[0;31m- tests/failure_ensure[0m
+
+[0;31m### Running: tests/failure_ensure[0m
+[1;32mtests/failure_ensure: [0mIm at failure ensure
+[1;32mtests/failure_ensure: [0m/home/renan/locaweb/ci-scripts/build-scripts/tests/failure_ensure: line 4: asdflkjasdlfkj: command not found
+
+[0;31m### Running: tests/failure_ensure[0m
+[1;32mtests/failure_ensure: [0mIm at failure ensure
+[1;32mtests/failure_ensure: [0m/home/renan/locaweb/ci-scripts/build-scripts/tests/failure_ensure: line 4: asdflkjasdlfkj: command not found
 
 [0;31m###############[0m
-[0;31mBUILD FAILED AT ./build failure[0m
+[0;31mBUILD FAILED AT tests/failure[0m
+[0;31m###############[0m
+
+[0;31m### failure_by_broken_post_hook will execute the following steps:[0m
+[0;31m- tests/success[0m
+[0;31m- tests/success_with_broken_post_hook[0m
+[0;31m- tests/its_broken_if_you_see_this[0m
+
+[0;31m### Running: tests/success_pre[0m
+[1;32mtests/success_pre: [0mim at begin
+
+[0;31m### Running: tests/success[0m
+[1;32mtests/success: [0mThis was an astounding success! Good job!
+
+[0;31m### Running: tests/success_post[0m
+[1;32mtests/success_post: [0mim at post
+
+[0;31m### Running: tests/success_with_broken_post_hook[0m
+[1;32mtests/success_with_broken_post_hook: [0msuccess, but my hook will break you
+
+[0;31m### Running: tests/success_with_broken_post_hook_post[0m
+[1;32mtests/success_with_broken_post_hook_post: [0mbroken post
+
+[0;31m###############[0m
+[0;31mBUILD FAILED AT tests/success_with_broken_post_hook_post[0m
+[0;31m###############[0m
+
+[0;31m### failure_by_broken_pre_hook will execute the following steps:[0m
+[0;31m- tests/success[0m
+[0;31m- tests/success_with_broken_pre_hook[0m
+[0;31m- tests/its_broken_if_you_see_this[0m
+
+[0;31m### Running: tests/success_pre[0m
+[1;32mtests/success_pre: [0mim at begin
+
+[0;31m### Running: tests/success[0m
+[1;32mtests/success: [0mThis was an astounding success! Good job!
+
+[0;31m### Running: tests/success_post[0m
+[1;32mtests/success_post: [0mim at post
+
+[0;31m### Running: tests/success_with_broken_pre_hook_pre[0m
+[1;32mtests/success_with_broken_pre_hook_pre: [0mbroken pre
+
+[0;31m###############[0m
+[0;31mBUILD FAILED AT tests/success_with_broken_pre_hook_pre[0m
 [0;31m###############[0m
 

@@ -69,7 +69,7 @@ To check that you have not introduced any regressions, run:
 
 ```sh
 cd $ci-scripts-root
-diff <(cat regression.txt) <(build-scripts/build run_tests 2>&1)
+diff <(cat regression.txt) <(./test.sh)
 ```
 
 This command checks whether the "test" jobs are yielding the same output. Think
@@ -79,5 +79,5 @@ If you want to recreate the regression, just run:
 
 ```sh
 cd $ci-scripts-root
-build-scripts/build run_tests >regression.txt 2>&1
+./test.sh >regression.txt
 ```

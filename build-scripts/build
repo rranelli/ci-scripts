@@ -7,8 +7,11 @@ export BUILD_SCRIPTS_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 export GIT_ROOT=$(cd $BUILD_SCRIPTS_DIR && git rev-parse --show-toplevel)
 export PROJECT_NAME=$(basename $(cd "$GIT_ROOT" && pwd))
 
-source $GIT_ROOT/ci-env.sh || source $GIT_ROOT/ci-env.sh.example
-source $GIT_ROOT/ci-jobs.sh || source $GIT_ROOT/ci-jobs.sh.example
+{ [ -f $GIT_ROOT/ci-env.sh ] && source $GIT_ROOT/ci-env.sh; } || \
+    source $GIT_ROOT/ci-env.sh.example
+
+{ [ -f $GIT_ROOT/ci-jobs.sh ] && source $GIT_ROOT/ci-jobs.sh; } || \
+    source $GIT_ROOT/ci-jobs.sh.example
 
 source $BUILD_SCRIPTS_DIR/helpers
 
