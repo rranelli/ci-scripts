@@ -62,9 +62,19 @@ success_ensure=(
 failure=(
     tests/success
     tests/failure
-    tests/success
+    tests/its_broken_if_you_see_this
 )
 failure_ensure=(
     tests/failure_ensure
     tests/failure_ensure
+)
+failure_by_broken_post_hook=(
+    tests/success
+    tests/success_with_broken_post_hook
+    tests/its_broken_if_you_see_this
+)
+failure_by_broken_pre_hook=(
+    tests/success
+    tests/success_with_broken_pre_hook
+    tests/its_broken_if_you_see_this
 )

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+echo 'broken pre'
+exit 1
