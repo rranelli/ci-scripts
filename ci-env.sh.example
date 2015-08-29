@@ -14,7 +14,6 @@ export GEM_MD5_PATH=$GEM_CACHE_PATH/$GEMFILE_MD5
 
 # Test job
 export COVERAGE=true
-export RUN_WITH_VCR_OFF=false
 
 # Quality Job
 export BUNDLE_AUDIT_IGNORED_CVES="nothing"
