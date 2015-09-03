@@ -43,6 +43,10 @@ package_ensure=(
     gitlab-notifiers/build-status
 )
 
+integration=(
+    monitoring
+)
+
 #
 # These jobs are used for testing purposes only
 #

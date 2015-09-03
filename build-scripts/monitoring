@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euo pipefail
+(curl -ksS "${APP_URL}/monitoring" | grep -q "error") \
+    && exit 1 || exit 0
