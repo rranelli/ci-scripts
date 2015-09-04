@@ -44,9 +44,16 @@ package_ensure=(
 )
 
 integration=(
-    monitoring
+    integration/monitoring
+    rvm-setup
+    gem-cache/import
+    bundle-install
+    gem-cache/rebuild
+    integration/test
 )
-
+integration_ensure=(
+    gitlab-notifiers/build-status
+)
 #
 # These jobs are used for testing purposes only
 #

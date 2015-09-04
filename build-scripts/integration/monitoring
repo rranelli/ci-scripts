@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+env_verify APP_URL
+
+exec 3>&1
+
+is_monitor_broken() {
+    curl -ksS "${APP_URL}/monitoring" | tee >&3 | grep -q "error"
+}
+
+max_wait=${max_wait:-60}
+wait_for_retry=1
+
+while (( wait < $max_wait ))
+do
+    # break from the loop if the monitor is *not* broken
+    is_monitor_broken || break
+    sleep $(( wait_for_retry *= 2 ))
+done
