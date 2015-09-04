@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+env_verify BUILD_SCRIPTS_DIR GITLAB_TOKEN GITLAB_ENDPOINT PROJECT_NAME GIT_BRANCH GIT_ROOT
+
 set +o pipefail
 $BUILD_SCRIPTS_DIR/bundle-outdated \
     | awk '

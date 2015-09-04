@@ -27,6 +27,16 @@ execute() {
 bundle_verify() {
     bundle list $1 2>&1 >/dev/null ||
         (red_echo "You must add the $1 gem to your bundle to enjoy all of ci-scripts niceties" >&2 &&
-                exit 1)
+             exit 1)
 }
 export -f bundle_verify
+
+env_verify() {
+    error=""
+    for var in $*; do
+        eval [ -z \$$var ] &&
+            error="${error}${var} environment variable is not set\n"
+    done
+    [ ! -z "$error" ] && { printf "$error"; exit 1 ;}
+}
+export -f env_verify
