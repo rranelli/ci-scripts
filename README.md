@@ -69,7 +69,7 @@ To check that you have not introduced any regressions, run:
 
 ```sh
 cd $ci-scripts-root
-diff <(cat regression.txt) <(./test.sh)
+./regression.sh
 ```
 
 This command checks whether the "test" jobs are yielding the same output. Think

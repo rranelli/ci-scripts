@@ -15,7 +15,7 @@
 
 [0;31m### Running: tests/success_with_no_hooks[0m
 [1;32mtests/success_with_no_hooks: [0mNo hooks!
-[1;32mtests/success_with_no_hooks: [0mbuild-scripts ci-env.sh.example ci-jobs.sh.example config.reek.example Gemfile.lock README.md regression.txt test.sh
+[1;32mtests/success_with_no_hooks: [0mbuild-scripts ci-env.sh.example ci-jobs.sh.example config.reek.example Gemfile.lock README.md regression.sh regression.txt test.sh
 
 [0;31m### Running: tests/success_because_minus_e_was_not_set[0m
 [1;32mtests/success_because_minus_e_was_not_set: [0mi worked but i shouldnt
