@@ -3,18 +3,28 @@ set -euo pipefail
 
 env_verify APP_URL
 
-exec 3>&1
+check_slash_monitoring() {
+    url="${APP_URL}/monitoring"
 
-is_monitor_broken() {
-    curl -ksS "${APP_URL}/monitoring" | tee >&3 | grep -q "error"
+    status=$(curl -sSko /dev/null -w "%{http_code}" "$url")
+    response=$(curl -ksS "$url")
+
+    echo "status=$status"
+    echo "response=$response"
+
+    [ "$status" -eq 200 ] && [[ ! "$response" =~ "error" ]]
 }
 
 max_wait=${max_wait:-60}
 wait_for_retry=1
 
-while (( wait < $max_wait ))
+while [[ $"wait_for_retry" -le $"max_wait" ]];
 do
-    # break from the loop if the monitor is *not* broken
-    is_monitor_broken || break
-    sleep $(( wait_for_retry *= 2 ))
+    if check_slash_monitoring; then
+        exit 0
+    else
+        sleep $(( wait_for_retry *= 2 ))
+    fi
 done
+
+exit 1
