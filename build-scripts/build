@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-set -eo pipefail
-
 [ -f ~/.bash_profile ] && source ~/.bash_profile
+
+set -eo pipefail
 
 export BUILD_SCRIPTS_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 export GIT_ROOT=$(cd $BUILD_SCRIPTS_DIR && git rev-parse --show-toplevel)
