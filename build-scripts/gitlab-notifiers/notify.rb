@@ -37,13 +37,60 @@ Trying to comment in merge request with message:
 #{message}
 EOF
 
-  if project && merge_request
-    Gitlab.client.create_merge_request_comment(
-      project.id, merge_request.id, message
-    )
-  else
-    puts 'Couldn\'t find a merge request to report to'
+  return puts 'Couldn\'t find a merge request.' unless project && merge_request
+
+  mr_url = File.join(
+    endpoint,
+    'projects', project.id.to_s,
+    'merge_requests', merge_request.id.to_s
+  )
+
+  make_notes_url = -> page { File.join(mr_url, "notes?page=#{page}&private_token=#{token}") }
+  NotDoneYet = Class.new(RuntimeError)
+
+  page = 1
+  notes = []
+  begin
+    notes_url = make_notes_url[page]
+
+    uri = URI.parse(notes_url)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
+
+    notes += JSON.parse(response.body)
+
+    fail NotDoneYet if response['link'] =~ /rel="next"/
+  rescue
+    page += 1
+    retry
   end
+
+  note_to_edit = notes.detect do |n|
+    n['body'].lines.first == message.lines.first
+  end
+
+  if note_to_edit
+    note_to_edit['body'] = '---'
+    note_url = File.join(
+      mr_url,
+      "notes/#{note_to_edit['id']}?private_token=#{token}"
+    )
+    request = Net::HTTP::Put.new(
+      URI.parse(note_url).request_uri,
+      'Content-Type' => 'application/json'
+    )
+    request.body = note_to_edit.to_json
+    http.request(request)
+  end
+
+  Gitlab.client.create_merge_request_comment(
+    project.id, merge_request.id, message
+  )
+
   puts 'Done!'
 rescue => e
   puts "Failed! Skipping comment in merge request... \n #{e.message}"
