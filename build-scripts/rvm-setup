@@ -2,10 +2,14 @@
 set -eo pipefail
 
 set +u
+cd ${GIT_ROOT}
+
 if [ -f .rvmrc ]; then
     source .rvmrc
 elif [ -f .rvmrc.example ]; then
     source .rvmrc.example
+elif [ -f .ruby-version ]; then
+    rvm use $(cat .ruby-version)
 else
     red_echo "Could not load .rvmrc or .rvmrc.example"
     exit 1
