@@ -38,6 +38,7 @@ package=(
     bundle-install-deployment
     gem-cache/rebuild
     debian-package
+    bundle-force-install
 )
 package_ensure=(
     gitlab-notifiers/build-status

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euo pipefail
+rm $GIT_ROOT/.bundle/config
+$BUILD_SCRIPTS_DIR/bundle-install
