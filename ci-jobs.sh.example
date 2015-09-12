@@ -54,6 +54,11 @@ integration=(
 integration_ensure=(
     gitlab-notifiers/build-status
 )
+
+only_report=()
+only_report_ensure=(
+    gitlab-notifiers/build-status
+)
 #
 # These jobs are used for testing purposes only
 #
