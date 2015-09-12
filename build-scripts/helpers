@@ -40,3 +40,9 @@ env_verify() {
     [ ! -z "$error" ] && { red_echo "$error"; exit 1 ;} || return 0
 }
 export -f env_verify
+
+bricky() {
+    rvm-exec 2.2.2@bricky bricky version
+    rvm-exec 2.2.2@bricky bricky $*
+}
+export -f bricky
