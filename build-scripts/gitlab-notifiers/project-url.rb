@@ -6,7 +6,7 @@ required_env = %w(
   GITLAB_ENDPOINT
   GITLAB_PROJECT_NAME
 )
-exit(1) unless system("env_verify #{required_env.join(' ')}")
+required_env.each { |e| ENV.fetch(e) }
 
 require 'gitlab'
 token = ENV.fetch('GITLAB_TOKEN')

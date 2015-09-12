@@ -7,7 +7,7 @@ required_env = %w(
   GITLAB_PROJECT_NAME
   GIT_BRANCH
 )
-exit(1) unless system("env_verify #{required_env.join(' ')}")
+required_env.each { |e| ENV.fetch(e) }
 
 require 'gitlab'
 
