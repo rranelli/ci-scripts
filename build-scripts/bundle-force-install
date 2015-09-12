@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 set -euo pipefail
-rm $GIT_ROOT/.bundle/config || true
 
+rm $GIT_ROOT/.bundle/config || true
 $BUILD_SCRIPTS_DIR/bundle-install
