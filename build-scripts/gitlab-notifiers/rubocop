@@ -16,8 +16,10 @@ else
     config=$GIT_ROOT/.rubocop.yml.example
 fi
 
-export GITLAB_PROJECT_URL=$(bundle exec $BUILD_SCRIPTS_DIR/gitlab-notifiers/project-url.rb)
 export GITLAB_PROJECT_NAME=${GITLAB_PROJECT_NAME:-${PROJECT_NAME}}
+export GITLAB_BRANCH=${GITLAB_BRANCH:-${GIT_BRANCH}}
+
+export GITLAB_PROJECT_URL=$(bundle exec $BUILD_SCRIPTS_DIR/gitlab-notifiers/project-url.rb)
 
 set +o pipefail
 bundle exec rubocop -c $config --format json --force-exclusion --no-color $files_to_inspect \

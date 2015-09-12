@@ -5,7 +5,7 @@ required_env = %w(
   GITLAB_TOKEN
   GITLAB_ENDPOINT
   GITLAB_PROJECT_NAME
-  GIT_BRANCH
+  GITLAB_BRANCH
 )
 required_env.each { |e| ENV.fetch(e) }
 
@@ -14,7 +14,7 @@ require 'gitlab'
 token        = ENV.fetch('GITLAB_TOKEN')
 endpoint     = ENV.fetch('GITLAB_ENDPOINT')
 project_name = ENV.fetch('GITLAB_PROJECT_NAME')
-branch_name  = File.basename(ENV.fetch('GIT_BRANCH'))
+branch_name  = File.basename(ENV.fetch('GITLAB_BRANCH'))
 
 message = STDIN.read
 

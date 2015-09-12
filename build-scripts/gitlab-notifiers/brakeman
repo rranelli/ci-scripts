@@ -12,6 +12,8 @@ bundle_verify gitlab
 bundle_verify brakeman
 
 export GITLAB_PROJECT_NAME=${GITLAB_PROJECT_NAME:-${PROJECT_NAME}}
+export GITLAB_BRANCH=${GITLAB_BRANCH:-${GIT_BRANCH}}
+
 export GITLAB_PROJECT_URL=$(bundle exec $BUILD_SCRIPTS_DIR/gitlab-notifiers/project-url.rb)
 
 set +o pipefail

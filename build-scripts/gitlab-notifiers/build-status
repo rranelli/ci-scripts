@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-env_verify BUILD_SCRIPTS_DIR GITLAB_TOKEN GITLAB_ENDPOINT PROJECT_NAME GIT_BRANCH GIT_ROOT
+env_verify BUILD_SCRIPTS_DIR GITLAB_TOKEN GITLAB_ENDPOINT PROJECT_NAME GIT_ROOT
 bundle_verify gitlab
 
 export GITLAB_PROJECT_NAME=${GITLAB_PROJECT_NAME:-${PROJECT_NAME}}
+export GITLAB_BRANCH=${GITLAB_BRANCH:-${GIT_BRANCH}}
+env_verify GITLAB_BRANCH # checks whether GITLAB_BRANCH or GIT_BRANCH were set
 
 $BUILD_SCRIPTS_DIR/gitlab-notifiers/format-build-status-message.rb \
     | bundle exec $BUILD_SCRIPTS_DIR/gitlab-notifiers/notify.rb
