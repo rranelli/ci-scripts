@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
-export CI=true
 
 # Gitlab notification
-export BUILD_FAILED=false
 export GITLAB_ENDPOINT=https://code.locaweb.com.br/api/v3
 # GITLAB_TOKEN='must be set up in the jenkins job configuration'
 
