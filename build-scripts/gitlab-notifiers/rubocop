@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+env_verify BUILD_SCRIPTS_DIR GITLAB_TOKEN GITLAB_ENDPOINT PROJECT_NAME GIT_BRANCH GIT_ROOT
+bundle_verify gitlab
+bundle_verify rubocop
+
 # get files which have been added or modified between HEAD and $target_branch
 target_branch=$(bundle exec $BUILD_SCRIPTS_DIR/gitlab-notifiers/merge-request-destination-branch.rb)
 files_to_inspect=$(git diff --diff-filter=AM --name-only $(git merge-base $target_branch HEAD) HEAD | grep '\.rb$')
@@ -12,11 +16,8 @@ else
     config=$GIT_ROOT/.rubocop.yml.example
 fi
 
-# Set gitlab up
-bundle_verify gitlab
-bundle_verify rubocop
-
 export GITLAB_PROJECT_URL=$(bundle exec $BUILD_SCRIPTS_DIR/gitlab-notifiers/project-url.rb)
+export GITLAB_PROJECT_NAME=${GITLAB_PROJECT_NAME:-${PROJECT_NAME}}
 
 set +o pipefail
 bundle exec rubocop -c $config --format json --force-exclusion --no-color $files_to_inspect \
