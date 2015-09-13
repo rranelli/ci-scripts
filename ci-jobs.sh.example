@@ -46,6 +46,7 @@ package_ensure=(
 
 integration=(
     integration/monitoring
+    git-clean
     rvm-setup
     gem-cache/import
     bundle-install
@@ -58,7 +59,11 @@ integration_ensure=(
 
 only_report=()
 only_report_ensure=(
+    rvm-setup         # these are only here because we need ruby to interact with gitlab
+    gem-cache/import  # should definitely in the future abandon it in favor of pure shell
+    bundle-install    # so that no gemfiles will be needed...
     gitlab-notifiers/build-status
+    gem-cache/rebuild
 )
 #
 # These jobs are used for testing purposes only
