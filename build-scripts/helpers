@@ -25,11 +25,26 @@ execute() {
 }
 
 bundle_verify() {
-    bundle list $1 2>&1 >/dev/null ||
-        (red_echo "You must add the $1 gem to your bundle to enjoy all of ci-scripts niceties" >&2 &&
-             exit 1)
+    if [[ $GEM_DEPENDENCIES_AUTOINSTALL == "true" ]]
+    then
+        rvm-exec 2.2.2@ci-scripts gem install --conservative $1
+    else
+        bundle list $1 2>&1 >/dev/null ||
+            (red_echo "You must add the $1 gem to your bundle to enjoy all of ci-scripts niceties" >&2 &&
+                 exit 1)
+    fi
 }
 export -f bundle_verify
+
+bundle_exec() {
+    if [[ $GEM_DEPENDENCIES_AUTOINSTALL == "true" ]]
+    then
+        rvm-exec 2.2.2@ci-scripts $*
+    else
+        bundle exec $*
+    fi
+}
+export -f bundle_exec
 
 env_verify() {
     error=""
@@ -46,3 +61,9 @@ bricky() {
     rvm-exec 2.2.2@bricky bricky $*
 }
 export -f bricky
+
+# Auto execute gemset create if this feature is enabled
+if [[ $GEM_DEPENDENCIES_AUTOINSTALL == "true" ]]
+then
+    rvm 2.2.2@ci-scripts --create
+fi

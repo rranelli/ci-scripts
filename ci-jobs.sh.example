@@ -37,7 +37,6 @@ package=(
     gem-cache/import
     bundle-install-deployment
     gem-cache/rebuild
-    bundle-force-install
     debian-package
     bundle-force-install
 )

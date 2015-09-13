@@ -10,7 +10,6 @@ export GITLAB_PROJECT_NAME=${GITLAB_PROJECT_NAME:-${PROJECT_NAME}}
 export GITLAB_BRANCH=${GITLAB_BRANCH:-${GIT_BRANCH}}
 export GITLAB_PROJECT_URL=$(bundle_exec $BUILD_SCRIPTS_DIR/gitlab-notifiers/project-url.rb)
 
-
 # get files which have been added or modified between HEAD and $target_branch
 target_branch=$(bundle_exec $BUILD_SCRIPTS_DIR/gitlab-notifiers/merge-request-destination-branch.rb)
 files_to_inspect=$(git diff --diff-filter=AM --name-only $(git merge-base $target_branch HEAD) HEAD | grep '\.rb$')

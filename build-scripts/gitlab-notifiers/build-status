@@ -9,4 +9,4 @@ export GITLAB_BRANCH=${GITLAB_BRANCH:-${GIT_BRANCH}}
 env_verify GITLAB_BRANCH # checks whether GITLAB_BRANCH or GIT_BRANCH were set
 
 $BUILD_SCRIPTS_DIR/gitlab-notifiers/format-build-status-message.rb \
-    | bundle exec $BUILD_SCRIPTS_DIR/gitlab-notifiers/notify.rb
+    | bundle_exec $BUILD_SCRIPTS_DIR/gitlab-notifiers/notify.rb

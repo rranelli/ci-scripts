@@ -15,3 +15,6 @@ export COVERAGE=true
 
 # Quality Job
 export BUNDLE_AUDIT_IGNORED_CVES="nothing"
+
+# Turn on to ci-scripts auto install process dependencies
+export GEM_DEPENDENCIES_AUTOINSTALL=${GEM_DEPENDENCIES_AUTOINSTALL:-false}

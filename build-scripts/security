@@ -2,8 +2,10 @@
 set -euo pipefail
 
 echo 'Executing brakeman...'
-bundle exec brakeman
+bundle_verify brakeman
+bundle_exec brakeman
 
 echo 'Executing bundle-audit...'
-bundle exec bundle-audit update
-bundle exec bundle-audit check --ignore $BUNDLE_AUDIT_IGNORED_CVES
+bundle_verify bundle-audit
+bundle_exec bundle-audit update
+bundle_exec bundle-audit check --ignore $BUNDLE_AUDIT_IGNORED_CVES
