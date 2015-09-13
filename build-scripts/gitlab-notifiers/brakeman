@@ -2,12 +2,6 @@
 set -euo pipefail
 
 env_verify BUILD_SCRIPTS_DIR GITLAB_TOKEN GITLAB_ENDPOINT PROJECT_NAME GIT_BRANCH GIT_ROOT
-
-# get files which have been added or modified between HEAD and origin/master
-target_branch=$(bundle exec $BUILD_SCRIPTS_DIR/gitlab-notifiers/merge-request-destination-branch.rb)
-files_to_inspect=$(git diff --diff-filter=AM --name-only $(git merge-base $target_branch HEAD) HEAD | grep '\.rb$')
-
-# Set gitlab up
 bundle_verify gitlab
 bundle_verify brakeman
 
@@ -15,6 +9,10 @@ export GITLAB_PROJECT_NAME=${GITLAB_PROJECT_NAME:-${PROJECT_NAME}}
 export GITLAB_BRANCH=${GITLAB_BRANCH:-${GIT_BRANCH}}
 
 export GITLAB_PROJECT_URL=$(bundle exec $BUILD_SCRIPTS_DIR/gitlab-notifiers/project-url.rb)
+
+# get files which have been added or modified between HEAD and origin/master
+target_branch=$(bundle exec $BUILD_SCRIPTS_DIR/gitlab-notifiers/merge-request-destination-branch.rb)
+files_to_inspect=$(git diff --diff-filter=AM --name-only $(git merge-base $target_branch HEAD) HEAD | grep '\.rb$')
 
 set +o pipefail
 bundle exec brakeman --format json -p $GIT_ROOT 2>/dev/null \
