@@ -4,7 +4,8 @@ BEGIN {
 /in groups? ".*default.*"/ {
     gsub(/ in group.*$/, "")
     print
+    flag=1
 }
-END {
-    if (!NR) print "  * No outdated gems, Good job! :clap:"
+END  {
+    if (flag != 1) print "  * No outdated gems, Good job! :clap:"
 }

@@ -3,8 +3,9 @@ BEGIN {
 }
 ! /.*default.*/ && /in groups?/ {
     gsub(/ in group.*$/, "")
-    print $0
+    print
+    flag=1
 }
 END {
-    if (!NR) print "  * No outdated gems, Good job! :clap:"
+    if (flag != 1) print "  * No outdated gems, Good job! :clap:"
 }
