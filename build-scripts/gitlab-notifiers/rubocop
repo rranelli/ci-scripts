@@ -2,16 +2,17 @@
 set -euo pipefail
 
 env_verify BUILD_SCRIPTS_DIR GITLAB_TOKEN GITLAB_ENDPOINT PROJECT_NAME GIT_BRANCH GIT_ROOT
+
 bundle_verify gitlab
 bundle_verify rubocop
 
 export GITLAB_PROJECT_NAME=${GITLAB_PROJECT_NAME:-${PROJECT_NAME}}
 export GITLAB_BRANCH=${GITLAB_BRANCH:-${GIT_BRANCH}}
+export GITLAB_PROJECT_URL=$(bundle_exec $BUILD_SCRIPTS_DIR/gitlab-notifiers/project-url.rb)
 
-export GITLAB_PROJECT_URL=$(bundle exec $BUILD_SCRIPTS_DIR/gitlab-notifiers/project-url.rb)
 
 # get files which have been added or modified between HEAD and $target_branch
-target_branch=$(bundle exec $BUILD_SCRIPTS_DIR/gitlab-notifiers/merge-request-destination-branch.rb)
+target_branch=$(bundle_exec $BUILD_SCRIPTS_DIR/gitlab-notifiers/merge-request-destination-branch.rb)
 files_to_inspect=$(git diff --diff-filter=AM --name-only $(git merge-base $target_branch HEAD) HEAD | grep '\.rb$')
 
 # find config file
@@ -22,7 +23,7 @@ else
 fi
 
 set +o pipefail
-bundle exec rubocop -c $config --format json --force-exclusion --no-color $files_to_inspect \
+bundle_exec rubocop -c $config --format json --force-exclusion --no-color $files_to_inspect \
     | $BUILD_SCRIPTS_DIR/gitlab-notifiers/format-rubocop-report-message.rb \
-    | bundle exec $BUILD_SCRIPTS_DIR/gitlab-notifiers/notify.rb
+    | bundle_exec $BUILD_SCRIPTS_DIR/gitlab-notifiers/notify.rb
 set -o pipefail

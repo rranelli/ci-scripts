@@ -18,7 +18,7 @@ check_slash_monitoring() {
 max_wait=${max_wait:-60}
 wait_for_retry=1
 
-while [[ $"wait_for_retry" -le $"max_wait" ]];
+while [[ "$wait_for_retry" -le "$max_wait" ]];
 do
     if check_slash_monitoring; then
         exit 0

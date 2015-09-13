@@ -57,6 +57,11 @@ integration_ensure=(
     gitlab-notifiers/build-status
 )
 
+deploy=(
+    deploy
+)
+
+# This will be removed once @andrerocker's merge request gets merged
 only_report=()
 only_report_ensure=(
     rvm-setup         # these are only here because we need ruby to interact with gitlab

@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+env_verify DEPLOY_PACKAGE_NAME DEPLOY_PACKAGE_HOST
+
+set +u
+version=$DEPLOY_PACKAGE_VERSION
+force_distro=${DEPLOY_PACKAGE_DISTRO:-stable}
+set -u
+
+deploy() {
+    ssh "$DEPLOY_PACKAGE_HOST" <<EOF
+get_distro() {
+    apt-cache madison "$DEPLOY_PACKAGE_NAME" \
+        | grep "$version" \
+        | awk '{ gsub(/\/main$/, "", \$6); print \$6 }' \
+        | head -n1
+}
+if [ -z "$version" ]; then
+  distro=${force_distro}
+else
+  distro=\$(get_distro)
+fi
+
+sudo apt-get update -q && \
+  sudo apt-get install "$DEPLOY_PACKAGE_NAME/\$distro" -y --force-yes
+EOF
+}
+
+max_wait=${DEPLOY_MAX_WAIT:-130}
+wait_for_retry=1
+
+while [[ "$wait_for_retry" -le "$max_wait" ]]; do
+    deploy && exit 0
+    sleep $(( wait_for_retry *= 2 ))
+done
+
+exit 1
