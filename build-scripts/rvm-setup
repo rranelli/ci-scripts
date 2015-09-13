@@ -10,8 +10,10 @@ elif [ -f .rvmrc.example ]; then
     source .rvmrc.example
 elif [ -f .ruby-version ]; then
     rvm use $(cat .ruby-version)
+elif [ -f .ruby-version.example ]; then
+    rvm use $(cat .ruby-version.example)
 else
-    red_echo "Could not load .rvmrc or .rvmrc.example"
+    red_echo "Could not load .rvmrc, .rvmrc.example, .ruby-version or .ruby-version.example"
     exit 1
 fi
 
