@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
+export GEM_DEPENDENCIES_AUTOINSTALL=${GEM_DEPENDENCIES_AUTOINSTALL:-}
+
+# Auto execute gemset create if this feature is enabled
+if [[ $GEM_DEPENDENCIES_AUTOINSTALL == "true" ]]
+then
+    rvm 2.2.2@ci-scripts --create
+fi
+
 red_echo() {
     local txtred='\e[0;31m' # Red
     local clroff='\e[0m' # Text Reset
@@ -61,9 +69,3 @@ bricky() {
     rvm-exec 2.2.2@bricky bricky $*
 }
 export -f bricky
-
-# Auto execute gemset create if this feature is enabled
-if [[ $GEM_DEPENDENCIES_AUTOINSTALL == "true" ]]
-then
-    rvm 2.2.2@ci-scripts --create
-fi
