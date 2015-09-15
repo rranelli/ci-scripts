@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 set -euo pipefail
-bundle exec rubycritic app lib --path tmp/rubycritic
+
+bundle_verify rubycritic
+bundle_exec rubycritic app lib --path tmp/rubycritic

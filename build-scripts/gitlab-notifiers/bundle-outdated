@@ -2,6 +2,7 @@
 set -euo pipefail
 
 env_verify BUILD_SCRIPTS_DIR GITLAB_TOKEN GITLAB_ENDPOINT PROJECT_NAME GIT_BRANCH GIT_ROOT
+bundle_verify gitlab
 
 export GITLAB_PROJECT_NAME=${GITLAB_PROJECT_NAME:-${PROJECT_NAME}}
 export GITLAB_BRANCH=${GITLAB_BRANCH:-${GIT_BRANCH}}
@@ -12,5 +13,5 @@ $BUILD_SCRIPTS_DIR/bundle-outdated \
 BEGIN { print "### Bundle outdated report: :cop:" }
       { print $0 "\n"}
 ' \
-    | bundle exec $BUILD_SCRIPTS_DIR/gitlab-notifiers/notify.rb
+    | bundle_exec $BUILD_SCRIPTS_DIR/gitlab-notifiers/notify.rb
 set -o pipefail
