@@ -22,12 +22,13 @@ else
   distro=\$(get_distro)
 fi
 
+echo installing "$DEPLOY_PACKAGE_NAME/\$distro"
 sudo apt-get update -q && \
   sudo apt-get install "$DEPLOY_PACKAGE_NAME/\$distro" -y --force-yes
 EOF
 }
 
-max_wait=${DEPLOY_MAX_WAIT:-130}
+max_wait=${DEPLOY_MAX_WAIT:-230}
 wait_for_retry=1
 
 while [[ "$wait_for_retry" -le "$max_wait" ]]; do
