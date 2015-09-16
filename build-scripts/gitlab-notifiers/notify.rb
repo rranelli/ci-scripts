@@ -72,21 +72,17 @@ EOF
     retry
   end
 
-  note_to_edit = notes.detect do |n|
+  note_to_delete = notes.detect do |n|
     n['body'].lines.first == message.lines.first
   end
 
-  if note_to_edit
-    note_to_edit['body'] = '---'
+  if note_to_delete
+    note_to_delete['body'] = '---'
     note_url = File.join(
       mr_url,
-      "notes/#{note_to_edit['id']}?private_token=#{token}"
+      "notes/#{note_to_delete['id']}?private_token=#{token}"
     )
-    request = Net::HTTP::Put.new(
-      URI.parse(note_url).request_uri,
-      'Content-Type' => 'application/json'
-    )
-    request.body = note_to_edit.to_json
+    request = Net::HTTP::Delete.new(URI.parse(note_url).request_uri)
     http.request(request)
   end
 
