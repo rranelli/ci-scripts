@@ -10,6 +10,7 @@ set -u
 
 deploy() {
     ssh "$DEPLOY_PACKAGE_HOST" <<EOF
+set -x
 get_distro() {
     apt-cache madison "$DEPLOY_PACKAGE_NAME" \
         | grep "$version" \
@@ -22,7 +23,6 @@ else
   distro=\$(get_distro)
 fi
 
-echo installing "$DEPLOY_PACKAGE_NAME/\$distro"
 sudo apt-get update -q && \
   sudo apt-get install "$DEPLOY_PACKAGE_NAME/\$distro" -y --force-yes
 EOF
