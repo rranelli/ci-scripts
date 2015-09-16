@@ -10,14 +10,13 @@ set -u
 
 deploy() {
     ssh "$DEPLOY_PACKAGE_HOST" <<EOF
-set -x
 get_distro() {
-    apt-cache madison "$DEPLOY_PACKAGE_NAME" \
+    sudo apt-cache madison "$DEPLOY_PACKAGE_NAME" \
         | grep "$version" \
-        | awk '{ gsub(/\/main$/, "", \$6); print \$6 }' \
+        | awk '{ gsub(/\\/main\$/, "", \$6); print \$6 }' \
         | head -n1
 }
-if [ -z "$version" ]; then
+if [ -z "${version}" ]; then
   distro=${force_distro}
 else
   distro=\$(get_distro)
