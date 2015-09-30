@@ -1,12 +1,6 @@
 #!/usr/bin/env bash
 export GEM_DEPENDENCIES_AUTOINSTALL=${GEM_DEPENDENCIES_AUTOINSTALL:-}
 
-# Auto execute gemset create if this feature is enabled
-if [[ $GEM_DEPENDENCIES_AUTOINSTALL == "true" ]]
-then
-    rvm 2.2.2@ci-scripts --create
-fi
-
 red_echo() {
     local txtred='\e[0;31m' # Red
     local clroff='\e[0m' # Text Reset
@@ -32,10 +26,15 @@ execute() {
     $BUILD_SCRIPTS_DIR/$1 |& with_label $1
 }
 
+ruby_manager_executor() {
+    BUNDLE_GEMFILE=/dev/null rvm-exec 2.2.2@ci-scripts $*
+}
+export -f ruby_manager_executor
+
 bundle_verify() {
     if [[ $GEM_DEPENDENCIES_AUTOINSTALL == "true" ]]
     then
-        rvm-exec 2.2.2@ci-scripts gem install --conservative $1
+        ruby_manager_executor gem install --conservative $1
     else
         bundle list $1 2>&1 >/dev/null ||
             (red_echo "You must add the $1 gem to your bundle to enjoy all of ci-scripts niceties" >&2 &&
@@ -47,7 +46,7 @@ export -f bundle_verify
 bundle_exec() {
     if [[ $GEM_DEPENDENCIES_AUTOINSTALL == "true" ]]
     then
-        rvm-exec 2.2.2@ci-scripts $*
+        ruby_manager_executor $*
     else
         bundle exec $*
     fi
@@ -65,7 +64,15 @@ env_verify() {
 export -f env_verify
 
 bricky() {
-    rvm-exec 2.2.2@bricky bricky version
-    rvm-exec 2.2.2@bricky bricky $*
+    bundle_verify bricky
+    bundle_exec bricky version
+    bundle_exec bricky $*
 }
 export -f bricky
+
+# Auto execute gemset create if this feature is enabled
+if [[ $GEM_DEPENDENCIES_AUTOINSTALL == "true" ]]
+then
+    # force environment creation
+    ruby_manager_executor rvm current
+fi
