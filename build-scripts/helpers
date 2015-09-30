@@ -27,7 +27,7 @@ execute() {
 }
 
 ruby_manager_executor() {
-    BUNDLE_IGNORE_CONFIG=true rvm-exec 2.2.2@ci-scripts $*
+    BUNDLE_GEMFILE=/dev/null rvm-exec 2.2.2@ci-scripts $*
 }
 export -f ruby_manager_executor
 
