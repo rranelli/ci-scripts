@@ -5,7 +5,10 @@ set -eo pipefail
 
 export BUILD_SCRIPTS_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 export GIT_ROOT=$(cd $BUILD_SCRIPTS_DIR && git rev-parse --show-toplevel)
-export PROJECT_NAME=$(basename $(cd "$GIT_ROOT" && pwd))
+export PROJECT_NAME=$(git remote -v \
+                             | awk '/origin/ {print $2}' \
+                             | head -n1 \
+                             | xargs -I{} basename {} .git)
 
 { [ -f $GIT_ROOT/ci-env.sh ] && source $GIT_ROOT/ci-env.sh; } || \
     source $GIT_ROOT/ci-env.sh.example

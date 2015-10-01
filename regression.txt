@@ -111,3 +111,4 @@
 [0;31m###############[0m
 [0;31mBUILD FAILED AT tests/success_with_broken_pre_hook_pre[0m
 [0;31m###############[0m
+
