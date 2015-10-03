@@ -17,6 +17,10 @@ Make sure that those gems are available in your bundle. We recommend you to do
 something in the lines of
 [this commit](https://code.locaweb.com.br/paas/recipes-manager/commit/e2aa7840fb5a50bac146f8ea47119246a75f0516)
 
+If you don't want to add the gems to your bundle for whatever reason, you can
+export the `GEM_DEPENDENCIES_AUTOINSTALL` variable with the `"true"` value and
+`ci-scripts` will provide a version of the required gems automatically.
+
 ### Introduction:
 
 `ci-scripts` provides a useful convention and `travis`-ish feel to configure
