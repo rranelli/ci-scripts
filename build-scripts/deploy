@@ -5,34 +5,55 @@ env_verify DEPLOY_PACKAGE_NAME DEPLOY_PACKAGE_HOST
 
 set +u
 version=$DEPLOY_PACKAGE_VERSION
-force_distro=${DEPLOY_PACKAGE_DISTRO:-stable}
+distro=${DEPLOY_PACKAGE_DISTRO:-stable}
 set -u
+
+now() { date +%s ;}
+
+get_distro_for() {
+    package=$1
+    version=$2
+
+    sudo apt-cache madison "$package" \
+        | grep "$version" \
+        | awk '{ gsub(/\/main$/, "", $6); print $6 }' \
+        | head -n1
+}
+
+with_spin_lock() {
+    deadline=$(( $(date +%s) + $1 ))
+    shift;
+    while [[ $(now) -le "$deadline" ]]; do
+        { $@ && return 0 ;} || sleep $(( $RANDOM % 10 + 1 ))
+    done
+    return 1
+}
 
 deploy() {
     ssh "$DEPLOY_PACKAGE_HOST" <<EOF
-get_distro() {
-    sudo apt-cache madison "$DEPLOY_PACKAGE_NAME" \
-        | grep "$version" \
-        | awk '{ gsub(/\\/main\$/, "", \$6); print \$6 }' \
-        | head -n1
-}
-if [ -z "${version}" ]; then
-  distro=${force_distro}
+set -eo pipefail
+
+$(declare -f now)
+$(declare -f with_spin_lock)
+$(declare -f get_distro_for)
+
+if [ -n "$version" ]; then
+  distro=\$(get_distro_for "$DEPLOY_PACKAGE_NAME" "$version")
+
+  if [ -z "$distro" ]; then
+    with_spin_lock 180 sudo apt-get update -q
+    distro=\$(get_distro_for "$DEPLOY_PACKAGE_NAME" "$version")
+  fi
+
+  # break out of the deployment if I can't still find the version
+  [ -z "\$distro" ] && exit 1
 else
-  distro=\$(get_distro)
+  distro=${distro}
+  with_spin_lock 180 sudo apt-get update -q
 fi
 
-sudo apt-get update -q && \
-  sudo apt-get install "$DEPLOY_PACKAGE_NAME/\$distro" -y --force-yes
+  with_spin_lock 180 sudo apt-get install "$DEPLOY_PACKAGE_NAME/\$distro" -y --force-yes
 EOF
 }
 
-max_wait=${DEPLOY_MAX_WAIT:-230}
-wait_for_retry=1
-
-while [[ "$wait_for_retry" -le "$max_wait" ]]; do
-    deploy && exit 0
-    sleep $(( wait_for_retry *= 2 ))
-done
-
-exit 1
+deploy
