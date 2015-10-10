@@ -1,0 +1,9 @@
+#!/bin/bash
+set -euo pipefail
+
+red_echo "cleaning old builds ..."
+
+PKGS="$PROJECT_NAME"_*
+rm -rf $GIT_ROOT/../$PKGS
+
+red_echo "done."

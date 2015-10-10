@@ -1,11 +1,6 @@
 #!/bin/bash
 set -euo pipefail
 
-echo "cleaning old builds ..."
-PKGS="$PROJECT_NAME"_*
-rm -rf $GIT_ROOT/../$PKGS
-echo "done."
-
 dpkg-buildpackage -rfakeroot -d -tc -us -uc
 
-echo 'Debian package built successfully.'
+red_echo 'Debian package built successfully.'
