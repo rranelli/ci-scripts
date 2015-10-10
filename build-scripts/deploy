@@ -31,16 +31,16 @@ with_spin_lock() {
 
 deploy() {
     ssh "$DEPLOY_PACKAGE_HOST" <<EOF
-set -eo pipefail
-
 $(declare -f now)
 $(declare -f with_spin_lock)
 $(declare -f get_distro_for)
+$(declare -f red_echo)
 
 if [ -n "$version" ]; then
   distro=\$(get_distro_for "$DEPLOY_PACKAGE_NAME" "$version")
 
   if [ -z "$distro" ]; then
+    red_echo "Couldn't get distro for $version. Calling apt-get update"
     with_spin_lock 180 sudo apt-get update -q
     distro=\$(get_distro_for "$DEPLOY_PACKAGE_NAME" "$version")
   fi
@@ -48,10 +48,12 @@ if [ -n "$version" ]; then
   # break out of the deployment if I can't still find the version
   [ -z "\$distro" ] && exit 1
 else
+  red_echo "Version wasn't set, so we're installing from a distro"
   distro=${distro}
   with_spin_lock 180 sudo apt-get update -q
 fi
 
+  red_echo "finally, calling apt-get install"
   with_spin_lock 180 sudo apt-get install "$DEPLOY_PACKAGE_NAME/\$distro" -y --force-yes
 EOF
 }
