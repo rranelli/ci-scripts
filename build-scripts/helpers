@@ -5,7 +5,7 @@ red_echo() {
     local txtred='\e[0;31m' # Red
     local clroff='\e[0m' # Text Reset
 
-    echo -e "$txtred$1$clroff"
+    echo -e "$txtred$@$clroff"
 }
 export -f red_echo
 
