@@ -49,7 +49,7 @@
 [1;32mtests/success_post: [0mim at post
 
 [0;31m### Running: tests/failure[0m
-[1;32mtests/failure: [0m/home/renan/locaweb/ci-scripts/build-scripts/tests/failure: line 3: sbrebolz: command not found
+[1;32mtests/failure: [0m/home/renan/code/ci-scripts/build-scripts/tests/failure: line 3: sbrebolz: command not found
 
 [0;31m### failure_ensure will execute the following steps:[0m
 [0;31m- tests/failure_ensure[0m
@@ -57,11 +57,11 @@
 
 [0;31m### Running: tests/failure_ensure[0m
 [1;32mtests/failure_ensure: [0mIm at failure ensure
-[1;32mtests/failure_ensure: [0m/home/renan/locaweb/ci-scripts/build-scripts/tests/failure_ensure: line 4: asdflkjasdlfkj: command not found
+[1;32mtests/failure_ensure: [0m/home/renan/code/ci-scripts/build-scripts/tests/failure_ensure: line 4: asdflkjasdlfkj: command not found
 
 [0;31m### Running: tests/failure_ensure[0m
 [1;32mtests/failure_ensure: [0mIm at failure ensure
-[1;32mtests/failure_ensure: [0m/home/renan/locaweb/ci-scripts/build-scripts/tests/failure_ensure: line 4: asdflkjasdlfkj: command not found
+[1;32mtests/failure_ensure: [0m/home/renan/code/ci-scripts/build-scripts/tests/failure_ensure: line 4: asdflkjasdlfkj: command not found
 
 [0;31m###############[0m
 [0;31mBUILD FAILED AT tests/failure[0m
@@ -111,4 +111,3 @@
 [0;31m###############[0m
 [0;31mBUILD FAILED AT tests/success_with_broken_pre_hook_pre[0m
 [0;31m###############[0m
-

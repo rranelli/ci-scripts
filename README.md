@@ -13,9 +13,7 @@ following gems:
 - rubocop
 - gitlab
 
-Make sure that those gems are available in your bundle. We recommend you to do
-something in the lines of
-[this commit](https://code.locaweb.com.br/paas/recipes-manager/commit/e2aa7840fb5a50bac146f8ea47119246a75f0516)
+Make sure that those gems are available in your bundle.
 
 If you don't want to add the gems to your bundle for whatever reason, you can
 export the `GEM_DEPENDENCIES_AUTOINSTALL` variable with the `"true"` value and
@@ -64,7 +62,7 @@ cd <your project root>
 ci_scripts_version=$(cat .ci-scripts-version || echo master)
 
 wget --output-document build-scripts.tar.gz \
-  https://code.locaweb.com.br/locawebcommon/ci-scripts/repository/archive.tar.gz?ref="${ci_scripts_version}"
+  https://<gitlabhost>/ci-scripts/repository/archive.tar.gz?ref="${ci_scripts_version}"
 tar xvf build-scripts.tar.gz --strip=1
 
 build-scripts/build <build-type>

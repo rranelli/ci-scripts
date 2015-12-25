@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Gitlab notification
-export GITLAB_ENDPOINT=https://code.locaweb.com.br/api/v3
+export GITLAB_ENDPOINT=
 # GITLAB_TOKEN='must be set up in the jenkins job configuration'
 
 # Gem caching

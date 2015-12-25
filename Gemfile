@@ -1,4 +1,4 @@
-source 'https://gems.locaweb.com.br/'
+source 'https://rubygems.org/'
 
 gem 'gitlab'
 gem 'reek'
